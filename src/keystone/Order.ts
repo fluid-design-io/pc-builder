@@ -52,6 +52,7 @@ export const Order = list(
         field: graphql.field({
           type: graphql.Int,
           resolve: async (item, args, context) => {
+            /* @ts-ignore */
             const itemTotal = await context.query.OrderItem.findMany({
               where: { order: { id: { equals: item.id.toString() } } },
               query: "total",
@@ -94,6 +95,7 @@ export const Order = list(
         if (operation === "delete") {
           // delete all order status
           const orderStatuses = await context.query.OrderStatus.findMany({
+            /* @ts-ignore */
             where: { order: { id: { equals: item.id.toString() } } },
             query: "id",
           });
