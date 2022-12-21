@@ -1,18 +1,18 @@
 export const OrderItem = ({ item }) => {
   return (
     <li className='flex space-x-6 py-6'>
-      <div className='h-24 w-24 flex-none rounded-md bg-gray-100 dark:bg-gray-700 object-cover object-center' />
-      <div className='flex flex-col gap-2 flex-1'>
-        <div className='flex justify-between items-center gap-4'>
-          <h3 className='flex items-center gap-4 text-base flex-1 font-medium'>
+      <div className='h-24 w-24 flex-none rounded-md bg-gray-100 object-cover object-center dark:bg-gray-700' />
+      <div className='flex flex-1 flex-col gap-2'>
+        <div className='flex items-center justify-between gap-4'>
+          <h3 className='flex flex-1 items-center gap-4 text-base font-medium'>
             {item.name}
           </h3>
-          <div className='flex items-center gap-4 flex-shrink-0'>
-            <p className='font-semibold text-end'>${item.price / 100}</p>
+          <div className='flex flex-shrink-0 items-center gap-4'>
+            <p className='text-end font-semibold'>${item.price / 100}</p>
           </div>
         </div>
         {item.description && (
-          <p className='text-sm whitespace-pre'>{item.description}</p>
+          <p className='whitespace-pre-line text-sm'>{item.description}</p>
         )}
       </div>
     </li>
