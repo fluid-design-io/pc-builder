@@ -1,7 +1,7 @@
 export const OrderItem = ({ item }) => {
   return (
     <li className='flex space-x-6 py-6'>
-      <div className='h-24 w-24 flex-none rounded-md bg-gray-100 object-cover object-center dark:bg-gray-700' />
+      <div className='h-14 w-14 flex-none rounded-md bg-gray-100 object-cover object-center dark:bg-gray-700 md:h-24 md:w-24' />
       <div className='flex flex-1 flex-col gap-2'>
         <div className='flex items-center justify-between gap-4'>
           <h3 className='flex flex-1 items-center gap-4 text-base font-medium'>

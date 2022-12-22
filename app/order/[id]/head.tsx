@@ -15,6 +15,7 @@ export default function Head({ params: { id } }) {
       <link
         href='https://api.mapbox.com/mapbox-gl-js/v2.11.0/mapbox-gl.css'
         rel='stylesheet'
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         /* @ts-ignore */
         precedence='default'
       ></link>

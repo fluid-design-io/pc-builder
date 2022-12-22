@@ -1,5 +1,5 @@
 import clsxm from "../../lib/clsxm";
-import { TimelineOverlay } from "../TimelineOverlay";
+import { TimelineOverlay } from "./TimelineOverlay";
 import { TimelineDot } from "./TimelineDot";
 
 const TimelineSegment = ({
@@ -24,25 +24,25 @@ const TimelineSegment = ({
   };
   const dateStr = date ? new Date(date).toLocaleString() : "";
   return (
-    <div className='flex gap-4 min-h-[6rem] items-stretch relative'>
+    <div className='relative flex min-h-[6rem] items-stretch gap-4'>
       {isActive && (
-        <div className='card-bg absolute -left-4 -top-4 right-0 bottom-4 z-[0]' />
+        <div className='card-primary-bg absolute -left-4 -top-4 right-0 bottom-4 z-[0]' />
       )}
-      <div className='flex-shrink-0 relative'>
+      <div className='relative flex-shrink-0'>
         <TimelineDot type={currentStage()} index={index} />
         <div
           className={clsxm(
-            "absolute top-0 left-3 w-2 h-full bg-gray-300 dark:bg-gray-600",
+            "absolute top-0 left-3 h-full w-2 bg-gray-300 dark:bg-gray-600",
             last && "hidden"
           )}
         />
       </div>
-      <div className='flex-1 relative z-[1]'>
+      <div className='relative z-[1] flex-1'>
         <div className='flex items-center justify-between'>
           <div className='flex-1'>
             <h3
               className={clsxm(
-                "text-sm font-medium text-gray-900 dark:text-gray-50 mb-1",
+                "mb-1 text-sm font-medium text-gray-900 dark:text-gray-50",
                 !date && "mt-1.5 opacity-50"
               )}
             >
@@ -55,7 +55,7 @@ const TimelineSegment = ({
             )}
           </div>
         </div>
-        {description && <p className='flex-shrink-0 flex'>{description}</p>}
+        {description && <p className='flex flex-shrink-0'>{description}</p>}
       </div>
     </div>
   );
@@ -84,8 +84,8 @@ export const Timeline = ({ statuses, currentStatus }) => {
   }, 0);
   const progress = (completedCount - 1) / defaultStatuses.length;
   return (
-    <div className='flex flex-col relative'>
-      <div className='rounded-full overflow-hidden'>
+    <div className='relative flex flex-col'>
+      <div className='overflow-hidden rounded-full'>
         <TimelineOverlay progress={progress} />
       </div>
       {defaultStatuses.map((status, i) => {

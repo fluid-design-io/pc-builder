@@ -1,8 +1,10 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { gql } from "graphql-request";
+import { Suspense } from "react";
+
 import { OrderInfo } from "../../../components/Order/OrderInfo";
 import { OrderNotFound } from "../../../components/Order/OrderNotFound";
 import { OrderTimeline } from "../../../components/Order/OrderTimeline";
-
 import { client } from "../../../src/util/request";
 
 const queryOrder = gql`
@@ -36,32 +38,10 @@ const queryOrder = gql`
   }
 `;
 
-const queryOrderStatuses = gql`
-  query QUERY_ORDER_STATUSES($id: ID!) {
-    orderStatuses(
-      where: { order: { id: { equals: $id } } }
-      orderBy: { createdAt: asc }
-    ) {
-      id
-      status
-      description
-      createdAt
-    }
-  }
-`;
-
 const fetchOrder = async ({ id }) =>
   client
     .request(queryOrder, { id })
     .then((data) => data.order)
-    .catch((err) => {
-      console.log(err);
-    });
-
-const fetchOrderStatuses = async ({ id }) =>
-  client
-    .request(queryOrderStatuses, { id })
-    .then((data) => data.orderStatuses)
     .catch((err) => {
       console.log(err);
     });
@@ -77,17 +57,18 @@ export default async function Page({ params: { id } }) {
       </main>
     );
   }
-  const orderStatuses = (await fetchOrderStatuses({ id })) as any;
   return (
     <main className='order-layout-wrap'>
-      <section className='order-layout relative grid-cols-1 md:grid-cols-5 items-start'>
+      <section className='order-layout relative grid-cols-1 items-start md:grid-cols-5'>
         <OrderInfo order={order} />
-        <OrderTimeline
-          id={id}
-          statuses={orderStatuses}
-          currentStatus={order.status}
-          deliveryDate={order.deliveryDate}
-        />
+        <Suspense fallback={<p>Loading timeline...</p>}>
+          {/* @ts-ignore */}
+          <OrderTimeline
+            id={id}
+            currentStatus={order.status}
+            deliveryDate={order.deliveryDate}
+          />
+        </Suspense>
       </section>
     </main>
   );

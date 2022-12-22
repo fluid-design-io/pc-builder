@@ -14,6 +14,7 @@
     "dev": "concurrently \"next dev -p 4000\" \"tailwindcss --watch\""
   },
   "dependencies": {
+    "@headlessui/react": "^1.7.7",
     "@heroicons/react": "^2.0.13",
     "@keystone-6/auth": "^6.0.0",
     "@keystone-6/core": "^4.0.0",
@@ -27,6 +28,7 @@
     "next": "^13.0.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "swiper": "^8.4.5",
     "tailwind-merge": "^1.8.0"
   },
   "devDependencies": {
@@ -34,7 +36,13 @@
     "@types/node": "18.11.14",
     "@types/react": "^18.0.9",
     "@types/react-dom": "^18.0.4",
+    "@typescript-eslint/eslint-plugin": "^5.47.0",
+    "@typescript-eslint/parser": "^5.47.0",
     "autoprefixer": "^10.4.13",
+    "eslint": "^8.30.0",
+    "eslint-config-next": "^13.0.7",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-simple-import-sort": "^8.0.0",
     "postcss": "^8.4.20",
     "prettier": "^2.8.1",
     "prettier-plugin-tailwindcss": "^0.2.1",

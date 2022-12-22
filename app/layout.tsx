@@ -1,8 +1,9 @@
+import { Header } from "@/core/Header";
 import { Inter } from "@next/font/google";
-import { Header } from "../components/Header";
 
 import "./globals.css";
-// import "./output.css";
+import "swiper/swiper.min.css";
+import "swiper/swiper-bundle.min.css";
 
 const inter = Inter({
   variable: "--font-inter",

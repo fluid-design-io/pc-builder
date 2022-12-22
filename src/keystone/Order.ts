@@ -1,14 +1,14 @@
 import { graphql } from "@graphql-ts/schema";
 import { list } from "@keystone-6/core";
 import {
-  timestamp,
   relationship,
   text,
-  select,
+  timestamp,
   virtual,
 } from "@keystone-6/core/fields";
-import { atTracking } from "../plugin/tracking/atTracking";
+
 import { permissions } from "./access";
+import { atTracking } from "../plugin/tracking/atTracking";
 
 const withTracking = atTracking();
 
@@ -52,6 +52,7 @@ export const Order = list(
         field: graphql.field({
           type: graphql.Int,
           resolve: async (item, args, context) => {
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             /* @ts-ignore */
             const itemTotal = await context.query.OrderItem.findMany({
               where: { order: { id: { equals: item.id.toString() } } },
@@ -95,6 +96,7 @@ export const Order = list(
         if (operation === "delete") {
           // delete all order status
           const orderStatuses = await context.query.OrderStatus.findMany({
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             /* @ts-ignore */
             where: { order: { id: { equals: item.id.toString() } } },
             query: "id",

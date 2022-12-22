@@ -8,7 +8,7 @@ import Head from "next/head";
 import { gql } from "graphql-request";
 import { client } from "../util/request";
 import { keystoneContext } from "../keystone/context";
-import { Header } from "../../components/Header";
+import { Header } from "../../components/core/Header";
 
 const Home: NextPage = ({
   users,

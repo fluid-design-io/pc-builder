@@ -1,6 +1,6 @@
 "use client";
 
-import clsxm from "../lib/clsxm";
+import clsxm from "../../lib/clsxm";
 import { motion } from "framer-motion";
 
 export const TimelineOverlay = ({ progress }) => {
@@ -8,7 +8,7 @@ export const TimelineOverlay = ({ progress }) => {
   return (
     <motion.div
       className={clsxm(
-        "absolute left-0 top-0 w-8 z-[1] bg-primary-400 dark:bg-primary-500"
+        "absolute left-0 top-0 z-[1] w-8 bg-primary-400 dark:bg-primary-500"
       )}
       initial={{ height: 0, borderRadius: 9999 }}
       animate={{
