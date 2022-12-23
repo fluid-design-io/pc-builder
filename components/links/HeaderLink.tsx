@@ -1,7 +1,8 @@
 import * as React from "react";
 
 import clsxm from "../../lib/clsxm";
-import UnstyledLink, { UnstyledLinkProps } from "./UnstyledLink";
+import UnstyledLink from "./UnstyledLink";
+import { UnstyledLinkProps } from "./UnstyledLink";
 
 const HeaderLink = React.forwardRef<HTMLAnchorElement, UnstyledLinkProps>(
   ({ className, children, ...rest }, ref) => {

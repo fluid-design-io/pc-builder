@@ -5,7 +5,7 @@ import HeaderLink from "../links/HeaderLink";
 
 export function Header() {
   return (
-    <header className='relative z-50 bg-white text-sm dark:bg-black'>
+    <header className='relative z-50 bg-white text-sm uppercase tracking-widest dark:bg-black'>
       <div className='mx-auto flex max-w-7xl items-center justify-between px-4 py-6 sm:px-6 md:justify-start md:space-x-10 lg:px-8'>
         <div className='flex justify-start lg:flex-1'>
           <Link href='/'>

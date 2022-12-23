@@ -10,6 +10,10 @@ import gameCover3 from "~/assets/game-cover/game-cover-3.webp";
 import gameCover4 from "~/assets/game-cover/game-cover-4.webp";
 import gameCover5 from "~/assets/game-cover/game-cover-5.webp";
 import gameCover6 from "~/assets/game-cover/game-cover-6.webp";
+import { SpecOption } from "./SpecOption";
+import clsxm from "lib/clsxm";
+
+import { AnimatePresence, motion } from "framer-motion";
 
 const PC_TIER = {
   TIER_1: "Hobby",
@@ -127,11 +131,6 @@ const games = [
     },
   },
 ];
-
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
-
 export const SpecSelector = () => {
   const [selected, setSelected] = useState(plans[0]);
   const [resolution, setResolution] = useState(screenResolutions[1]);
@@ -148,8 +147,7 @@ export const SpecSelector = () => {
           className='mt-2'
         >
           <RadioGroup.Label className='sr-only'>
-            {" "}
-            Choose a memory option{" "}
+            Choose a memory option
           </RadioGroup.Label>
           <div className='grid grid-cols-3 gap-3'>
             {screenResolutions.map((screen) => (
@@ -157,14 +155,14 @@ export const SpecSelector = () => {
                 key={`screen-${screen.name}`}
                 value={screen}
                 className={({ active, checked }) =>
-                  classNames(
+                  clsxm(
                     checked
                       ? "border-transparent bg-indigo-600 text-white"
                       : "border-gray-300 dark:border-gray-700",
                     active
                       ? "border-indigo-500 bg-indigo-600 text-white ring-2 ring-indigo-500 hover:bg-indigo-700"
                       : "",
-                    "flex items-center justify-center rounded-md border py-3 px-3 text-sm font-medium uppercase sm:flex-1"
+                    "flex cursor-pointer select-none items-center justify-center rounded-md border py-3 px-3 text-sm font-medium uppercase sm:flex-1"
                   )
                 }
               >
@@ -176,69 +174,14 @@ export const SpecSelector = () => {
         <RadioGroup value={selected} onChange={setSelected}>
           <RadioGroup.Label className='sr-only'>Server size</RadioGroup.Label>
           <div className='space-y-4'>
-            {plans.map((plan) => (
-              <RadioGroup.Option
-                key={plan.name}
-                value={plan}
-                className={({ checked, active }) =>
-                  classNames(
-                    checked
-                      ? "border-transparent"
-                      : "border-gray-300 dark:border-gray-700",
-                    active ? "border-indigo-500 ring-2 ring-indigo-500" : "",
-                    "relative block cursor-pointer rounded-lg border bg-white px-6 py-4 shadow-sm focus:outline-none dark:bg-white/5 sm:flex sm:justify-between"
-                  )
-                }
-              >
-                {({ active, checked }) => (
-                  <>
-                    <span className='flex items-center'>
-                      <span className='flex flex-col text-sm'>
-                        <RadioGroup.Label
-                          as='span'
-                          className='font-medium text-gray-900 dark:text-gray-100'
-                        >
-                          {plan.name}
-                        </RadioGroup.Label>
-                        <RadioGroup.Description
-                          as='span'
-                          className='text-gray-500 dark:text-gray-400'
-                        >
-                          <span className='block sm:inline'>
-                            {plan.ram} RAM
-                          </span>
-                          <br />
-                          <span className='block sm:inline'>{plan.gpu}</span>
-                          <br />
-                          <span className='block sm:inline'>{plan.disk}</span>
-                        </RadioGroup.Description>
-                      </span>
-                    </span>
-                    <RadioGroup.Description
-                      as='span'
-                      className='mt-2 flex text-sm sm:mt-0 sm:ml-4 sm:flex-col sm:text-right'
-                    >
-                      <span className='font-medium text-gray-900 dark:text-gray-100'>
-                        {plan.price}
-                      </span>
-                    </RadioGroup.Description>
-                    <span
-                      className={classNames(
-                        active ? "border" : "border-2",
-                        checked ? "border-indigo-500" : "border-transparent",
-                        "pointer-events-none absolute -inset-px rounded-lg"
-                      )}
-                      aria-hidden='true'
-                    />
-                  </>
-                )}
-              </RadioGroup.Option>
+            {plans.map((plan, index) => (
+              <SpecOption key={`plan-${plan.name}`} plan={plan} index={index} />
             ))}
           </div>
         </RadioGroup>
       </div>
       <div className='card-secondary card-secondary-hover grid grid-cols-2 gap-1 md:grid-cols-3'>
-        {games.map((game) => (
+        {games.map((game, i) => (
           <div
             key={`game-${game.id}`}
             className='relative transform-gpu overflow-hidden rounded-sm'
@@ -246,10 +189,40 @@ export const SpecSelector = () => {
             <Image src={game.cover} alt={game.name} placeholder='blur' />
             <div className='absolute bottom-0 left-0 z-10 w-full overflow-hidden rounded-b-sm bg-black bg-opacity-50 p-2 backdrop-blur'>
               <div className='flex items-center'>
-                <div>
-                  <span className='font-bold text-white'>
-                    {calculateFrameRate(game.frameRate[selected.name])} FPS
-                  </span>
+                <div className='flex items-center'>
+                  <AnimatePresence mode='popLayout'>
+                    <motion.div
+                      initial={{ opacity: 0, y: 12, scaleY: 0.8 }}
+                      animate={{ opacity: 1, y: 0, scaleY: 1 }}
+                      exit={{ opacity: 0, y: -12, scaleY: 0.8 }}
+                      transition={{
+                        duration: 1,
+                        delay: i * 0.08,
+                        type: "spring",
+                        bounce: 0,
+                      }}
+                      key={`fps-${game.id}-${game.frameRate[selected.name]}-${
+                        selected.name
+                      }`}
+                      className='relative font-bold text-white'
+                    >
+                      {calculateFrameRate(game.frameRate[selected.name])}
+                    </motion.div>
+                  </AnimatePresence>
+                  <motion.span
+                    layoutId={`span-${game.id}-${
+                      game.frameRate[selected.name]
+                    }-${selected.name}`}
+                    transition={{
+                      delay: i * 0.08,
+                    }}
+                    style={{
+                      paddingLeft: 4,
+                    }}
+                    className='text-white'
+                  >
+                    FPS
+                  </motion.span>
                 </div>
               </div>
             </div>

@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { A11y, Navigation, Pagination } from "swiper";
+import { A11y, Navigation, Pagination, Autoplay } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import cover_1 from "~/assets/cover/pc-1.jpg";
@@ -58,16 +58,17 @@ export const CoverSlider = () => {
   ));
   return (
     <Swiper
-      modules={[Navigation, Pagination, A11y]}
+      modules={[Navigation, Pagination, A11y, Autoplay]}
       spaceBetween={50}
-      slidesPerView={"auto"}
+      slidesPerView='auto'
       centeredSlides={true}
+      autoplay={{ delay: 3500 }}
       initialSlide={1}
       loop={true}
       navigation
       pagination={{ clickable: true }}
-      onSlideChange={() => console.log("slide change")}
-      onSwiper={(swiper) => console.log(swiper)}
+      // onSlideChange={() => console.log("slide change")}
+      // onSwiper={(swiper) => console.log(swiper)}
       className='my-8'
     >
       {slidesMarkup}
