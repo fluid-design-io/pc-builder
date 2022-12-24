@@ -1,30 +1,29 @@
-import UnderlineLink from "@/links/UnderlineLink";
+import UnderlineLink from '@/links/UnderlineLink';
 
 const faqs = [
   {
     id: 1,
-    question: "How long will it take for for my PC to arrive?",
+    question: 'How long will it take for for my PC to arrive?',
     answer:
-      "Due to high demand from the holidays, we are expecting shipping to be delayed around 4-6 weeks. We apologize for the delay.",
+      'Due to high demand from the holidays, we are expecting shipping to be delayed around 4-6 weeks. We apologize for the delay.',
   },
   {
     id: 2,
-    question: "Warranty Services",
+    question: 'Warranty Services',
     answer:
-      "All orders placed with include a 2-year parts and labor limited warranty. We will repair or replace defective hardware free of charge as long as they have not been physically damaged or abused.",
+      'All orders placed with include a 2-year parts and labor limited warranty. We will repair or replace defective hardware free of charge as long as they have not been physically damaged or abused.',
   },
 ];
 
 export const FAQ = () => {
   return (
     <div className='card-secondary rounded-md'>
-      <div className='py-8 md:px-8 lg:px-10'>
+      <div className='py-8 px-2 md:px-8 lg:px-10'>
         <div className='lg:mx-auto lg:max-w-2xl lg:text-center'>
           <h2>Frequently asked questions</h2>
           <p className='mt-4'>
-            Ac euismod vel sit maecenas id pellentesque eu sed consectetur.
-            Malesuada adipiscing sagittis vel nulla nec. Urna, sed a lectus
-            elementum blandit et.
+            Here are some of our FAQs. If you have any other questions you'd
+            like answered please feel free to email us.
           </p>
         </div>
         <div className='mt-8 md:mt-12 lg:mt-14'>

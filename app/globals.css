@@ -4,6 +4,7 @@
 
 html {
   @apply bg-gray-100 font-sans text-gray-900 dark:bg-[#161618] dark:text-[#EBEBF1];
+  font-family: var(--font-inter);
 }
 
 @layer base {
@@ -37,7 +38,7 @@ html {
     @apply bg-gray-50 dark:bg-[#212125];
   }
   .cursor-newtab {
-    cursor: url("/assets/images/new-tab.png") 10 10, pointer;
+    cursor: /* url('/public/assets/images/new-tab.png') 10 10, */ pointer;
   }
   /* #region  /**=========== Typography =========== */
   .h0 {

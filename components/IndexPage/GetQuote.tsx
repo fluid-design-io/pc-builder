@@ -1,3 +1,5 @@
+import { QuotePattern } from './QuotePattern';
+
 export const GetQuote = () => {
   return (
     <div className='relative'>
@@ -7,7 +9,7 @@ export const GetQuote = () => {
       />
       <div className='relative'>
         <div className='rounded-md bg-gradient-to-l from-rose-800 to-primary-700 py-10 px-6 sm:py-16 sm:px-12 lg:flex lg:items-center lg:py-20 lg:px-20'>
-          <div className='lg:w-0 lg:flex-1'>
+          <div className='pointer-events-none relative z-[2] lg:w-0 lg:flex-1'>
             <h2 className='text-md font-bold tracking-tight text-white'>
               Get a quote
             </h2>
@@ -15,7 +17,7 @@ export const GetQuote = () => {
               Interested building a custom PC? Get a quote from us today!
             </p>
           </div>
-          <div className='mt-12 sm:w-full sm:max-w-md lg:mt-0 lg:ml-8 lg:flex-1'>
+          <div className='relative z-[2] mt-12 sm:w-full sm:max-w-md lg:mt-0 lg:ml-8 lg:flex-1'>
             <form className='sm:flex'>
               <label htmlFor='email-address' className='sr-only'>
                 Email address
@@ -36,8 +38,8 @@ export const GetQuote = () => {
                 Get a quote
               </button>
             </form>
-            <p className='mt-3 text-sm text-cyan-100'>
-              We care about the protection of your data. Read our{" "}
+            <p className='relative z-[2] mt-3 text-sm text-cyan-100'>
+              We care about the protection of your data. Read our{' '}
               <a href='#' className='font-medium text-white underline'>
                 Privacy Policy.
               </a>
@@ -45,6 +47,8 @@ export const GetQuote = () => {
           </div>
         </div>
       </div>
+
+      <QuotePattern />
     </div>
   );
 };

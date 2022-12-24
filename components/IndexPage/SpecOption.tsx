@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { GridPatterns } from "@/core/GridPatterns";
-import { RadioGroup } from "@headlessui/react";
-import { useMotionValue } from "framer-motion";
-import clsxm from "lib/clsxm";
+import { GridPatterns } from '@/core/GridPatterns';
+import { RadioGroup } from '@headlessui/react';
+import { useMotionValue } from 'framer-motion';
+import clsxm from 'lib/clsxm';
 
 const patterns = [
   {
@@ -51,10 +51,10 @@ export const SpecOption = ({ plan, index }) => {
       className={({ checked, active }) =>
         clsxm(
           checked
-            ? "border-transparent"
-            : "border-gray-300 dark:border-gray-700",
-          active ? "border-indigo-500 ring-2 ring-indigo-500" : "",
-          "group relative block cursor-pointer rounded-md border bg-white px-6 py-4 shadow-sm focus:outline-none dark:bg-white/5 sm:flex sm:justify-between"
+            ? 'border-transparent'
+            : 'border-gray-300 dark:border-gray-700',
+          active ? 'border-indigo-500 ring-2 ring-indigo-500' : '',
+          'group relative block cursor-pointer rounded-md border bg-white px-6 py-4 shadow-sm focus:outline-none dark:bg-white/5 sm:flex sm:justify-between'
         )
       }
       onMouseMove={onMouseMove}
@@ -92,9 +92,9 @@ export const SpecOption = ({ plan, index }) => {
           </RadioGroup.Description>
           <span
             className={clsxm(
-              active ? "border" : "border-2",
-              checked ? "border-indigo-500" : "border-transparent",
-              "pointer-events-none absolute -inset-px z-[5] rounded-md"
+              active ? 'border' : 'border-2',
+              checked ? 'border-indigo-500' : 'border-transparent',
+              'pointer-events-none absolute -inset-px z-[5] rounded-md'
             )}
             aria-hidden='true'
           />

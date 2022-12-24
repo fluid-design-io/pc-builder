@@ -1,13 +1,15 @@
-import { Header } from "@/core/Header";
-import { Inter } from "@next/font/google";
+import { Inter } from '@next/font/google';
 
-import "./globals.css";
-import "swiper/swiper.min.css";
-import "swiper/swiper-bundle.min.css";
+import './globals.css';
+import 'swiper/swiper.min.css';
+import 'swiper/swiper-bundle.min.css';
+
+import { Footer } from '@/core/Footer';
+import { Header } from '@/core/Header';
 
 const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
+  // variable: '--font-inter',
+  subsets: ['latin'],
 });
 
 export default function RootLayout({
@@ -20,6 +22,7 @@ export default function RootLayout({
       <body>
         <Header />
         {children}
+        <Footer />
       </body>
     </html>
   );

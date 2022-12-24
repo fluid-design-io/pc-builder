@@ -1,12 +1,15 @@
+'use client';
+
+import { GridPattern } from '@/core/GridPattern';
+import { useMotionValue } from 'framer-motion';
+
 import { useMotionTemplate } from 'framer-motion';
-import { GridPattern } from './GridPattern';
 import { motion } from 'framer-motion';
 import clsxm from 'lib/clsxm';
 
 export const GridPatterns = ({
   mouseX,
   mouseY,
-  checked = false,
   className = '',
   gridWidth = 120,
   gridHeight = 40,
@@ -18,10 +21,9 @@ export const GridPatterns = ({
   squares: number[][];
   gridWidth?: number;
   gridHeight?: number;
-  checked?: boolean;
   className?: string;
 }) => {
-  const maskImage = useMotionTemplate`radial-gradient(220px at ${mouseX}px ${mouseY}px, white, transparent)`;
+  const maskImage = useMotionTemplate`radial-gradient(280px at ${mouseX}px ${mouseY}px, white, transparent)`;
   const style = { maskImage, WebkitMaskImage: maskImage };
 
   return (
@@ -42,32 +44,10 @@ export const GridPatterns = ({
       </div>
       <motion.div
         className={clsxm(
-          'absolute inset-0 rounded-md bg-gradient-to-r from-primary-100 to-rose-100 opacity-0 transition duration-300 group-hover:opacity-100 dark:from-primary-600/30 dark:to-rose-600/30',
-          checked && 'group-hover:opacity-10'
+          'absolute inset-0 rounded-md bg-gradient-to-r from-primary-100 to-rose-100 opacity-0 transition duration-300 group-hover:opacity-100 dark:from-primary-600/30 dark:to-rose-600/30'
         )}
         style={style}
       />
-      {checked && (
-        <motion.div
-          initial={{
-            opacity: 0,
-            borderRadius: '100%',
-            width: 0,
-            height: 0,
-            x: mouseX.get(),
-            y: mouseY.get(),
-          }}
-          animate={{
-            opacity: 1,
-            width: 1000,
-            height: 1000,
-            x: mouseX.get() - 500,
-            y: mouseY.get() - 500,
-          }}
-          transition={{ duration: 0.85, type: 'spring', bounce: 0 }}
-          className='absolute origin-center rounded-md bg-gradient-to-r from-primary-100 to-rose-100 opacity-70 mix-blend-multiply dark:from-primary-600/40 dark:to-rose-600/30 dark:opacity-90 dark:mix-blend-screen'
-        />
-      )}
       <motion.div
         className='absolute inset-0 rounded-md opacity-0 mix-blend-overlay transition duration-300 group-hover:opacity-100 dark:mix-blend-multiply'
         style={style}
@@ -80,6 +60,38 @@ export const GridPatterns = ({
           {...gridProps}
         />
       </motion.div>
+    </div>
+  );
+};
+
+export const QuotePattern = () => {
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  function onMouseMove({ currentTarget, clientX, clientY }) {
+    const { left, top } = currentTarget.getBoundingClientRect();
+    mouseX.set(clientX - left);
+    mouseY.set(clientY - top);
+  }
+  const pattern = {
+    y: -6,
+    squares: [
+      [0, 1],
+      [1, 3],
+      [-1, 2],
+      [2, 1],
+    ],
+  };
+  return (
+    <div className='group absolute inset-0 z-[1]' onMouseMove={onMouseMove}>
+      <GridPatterns
+        mouseX={mouseX}
+        mouseY={mouseY}
+        squares={pattern.squares}
+        y={pattern.y}
+        gridHeight={80}
+        gridWidth={200}
+      />
     </div>
   );
 };
