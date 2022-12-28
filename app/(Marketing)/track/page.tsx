@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
+import { IndexCover } from 'components/IndexPage/IndexCover';
+import { Search } from 'components/Order/Search';
+import ProjectFeed from 'components/project/ProjectFeed';
+import clsxm from 'lib/clsxm';
 import { Suspense } from 'react';
-import clsxm from '../../lib/clsxm';
-import { IndexCover } from '../../components/IndexPage/IndexCover';
-import { Search } from '../../components/Order/Search';
-import ProjectFeed from '../../components/project/ProjectFeed';
 
 const random = () => Math.floor(Math.random() * 3) + 1;
 

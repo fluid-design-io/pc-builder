@@ -1,15 +1,21 @@
-import { Inter } from '@next/font/google';
+import { Inter, Big_Shoulders_Display } from '@next/font/google';
 
-import './globals.css';
+import '../globals.css';
 import 'swiper/swiper.min.css';
 import 'swiper/swiper-bundle.min.css';
 
 import { Footer } from '@/core/Footer';
 import { Header } from '@/core/Header';
+import clsxm from 'lib/clsxm';
 
 const inter = Inter({
-  // variable: '--font-inter',
+  variable: '--font-inter',
   subsets: ['latin'],
+});
+
+const primary = Big_Shoulders_Display({
+  subsets: ['latin'],
+  variable: '--font-primary',
 });
 
 export default function RootLayout({
@@ -18,7 +24,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang='en' className={inter.className}>
+    <html lang='en' className={clsxm(primary.variable, inter.variable)}>
       <body>
         <Header />
         {children}
