@@ -1,34 +1,12 @@
-import { gql } from "graphql-request";
-
-import { Timeline } from "./Timeline";
-import { CopyOrderIdBtn } from "./CopyOrderIdBtn";
-import { OrderDeliveryInfo } from "./OrderDeliveryInfo";
-import { client } from "../../src/util/request";
-
-const queryOrderStatuses = gql`
-  query QUERY_ORDER_STATUSES($id: ID!) {
-    orderStatuses(
-      where: { order: { id: { equals: $id } } }
-      orderBy: { createdAt: asc }
-    ) {
-      id
-      status
-      description
-      createdAt
-    }
-  }
-`;
-
-const fetchOrderStatuses = async ({ id }) =>
-  client
-    .request(queryOrderStatuses, { id })
-    .then((data) => data.orderStatuses)
-    .catch((err) => {
-      console.log(err);
-    });
+import { Timeline } from './Timeline';
+import { CopyOrderIdBtn } from './CopyOrderIdBtn';
+import { OrderDeliveryInfo } from './OrderDeliveryInfo';
 
 export const OrderTimeline = async ({ id, currentStatus, deliveryDate }) => {
-  const orderStatuses = (await fetchOrderStatuses({ id })) as any;
+  const orderStatuses = undefined;
+  if (!orderStatuses) {
+    return null;
+  }
   return (
     <div className='w-full px-4 md:col-span-2 md:px-6 lg:px-8'>
       <OrderDeliveryInfo

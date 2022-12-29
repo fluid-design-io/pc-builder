@@ -1,3 +1,5 @@
+import { HeadFavIcon } from '@/core/HeadFavIcon';
+
 export default function Head({ params: { id } }) {
   return (
     <>
@@ -6,7 +8,6 @@ export default function Head({ params: { id } }) {
         name='description'
         content='Simple Tracker is a simple app to track your orders'
       />
-      <link rel='icon' href='/favicon.ico' />
       <meta
         content='width=device-width, initial-scale=1, viewport-fit=cover'
         name='viewport'
@@ -19,6 +20,7 @@ export default function Head({ params: { id } }) {
         /* @ts-ignore */
         precedence='default'
       ></link>
+      <HeadFavIcon />
     </>
   );
 }
