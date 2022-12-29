@@ -5,12 +5,13 @@ import clsxm from 'lib/clsxm';
 import { Popover, Transition } from '@headlessui/react';
 import Link from 'next/link';
 import { Fragment } from 'react';
+import { primaryNavigation } from 'lib/navigation';
 
 function MobileNavIcon({ open }) {
   return (
     <svg
       aria-hidden='true'
-      className='h-3.5 w-3.5 overflow-visible stroke-slate-700'
+      className='h-3.5 w-3.5 overflow-visible stroke-slate-700 dark:stroke-slate-300'
       fill='none'
       strokeWidth={2}
       strokeLinecap='round'
@@ -75,10 +76,11 @@ export function MobileNavigation() {
             as='div'
             className='absolute inset-x-0 top-full mt-4 flex origin-top flex-col rounded-md bg-white p-4 text-lg tracking-tight text-slate-900 shadow-xl ring-1 ring-slate-900/5 dark:bg-gray-800 dark:text-gray-100'
           >
-            <MobileNavLink href='/about-us'>About Us</MobileNavLink>
-            <MobileNavLink href='/reviews'>Reviews</MobileNavLink>
-            <MobileNavLink href='/support'>Support</MobileNavLink>
-            <MobileNavLink href='/track'>Track my order</MobileNavLink>
+            {primaryNavigation.map(({ href, label }) => (
+              <MobileNavLink href={href} key={`mobile-nav-link-${href}`}>
+                {typeof label === 'string' ? label : label.mobile}
+              </MobileNavLink>
+            ))}
             <hr className='m-2 border-slate-300/40 dark:border-slate-700/60' />
             <MobileNavLink href='/login'>Sign in</MobileNavLink>
           </Popover.Panel>

@@ -5,7 +5,7 @@ import 'swiper/swiper.min.css';
 import 'swiper/swiper-bundle.min.css';
 
 import { Footer } from '@/core/Footer';
-import { Header } from '@/core/Header';
+import { MarketingHeader } from '@/core/MarketingHeader';
 import clsxm from 'lib/clsxm';
 
 const inter = Inter({
@@ -26,7 +26,7 @@ export default function RootLayout({
   return (
     <html lang='en' className={clsxm(primary.variable, inter.variable)}>
       <body>
-        <Header />
+        <MarketingHeader />
         {children}
         <Footer />
       </body>

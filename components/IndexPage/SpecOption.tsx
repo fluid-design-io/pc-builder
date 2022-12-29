@@ -53,8 +53,10 @@ export const SpecOption = ({ plan, index }) => {
           checked
             ? 'border-transparent'
             : 'border-gray-300 dark:border-gray-700',
-          active ? 'border-indigo-500 ring-2 ring-indigo-500' : '',
-          'group relative block cursor-pointer rounded-md border bg-white px-6 py-4 shadow-sm focus:outline-none dark:bg-white/5 sm:flex sm:justify-between'
+          active &&
+            'border-indigo-700 ring-2 ring-indigo-700 dark:border-indigo-300 dark:ring-indigo-300',
+          'group relative block cursor-pointer rounded-md border bg-white px-6 py-4 shadow-sm transition-colors focus:outline-none dark:bg-white/5 sm:flex sm:justify-between',
+          checked && 'bg-primary-100/60 dark:bg-primary-700'
         )
       }
       onMouseMove={onMouseMove}
@@ -66,13 +68,19 @@ export const SpecOption = ({ plan, index }) => {
             <span className='flex flex-col text-sm'>
               <RadioGroup.Label
                 as='span'
-                className='pb-2 font-medium text-gray-900 dark:text-gray-100 md:pb-0'
+                className={clsxm(
+                  'pb-2 font-medium text-gray-900 dark:text-gray-100 md:pb-0',
+                  checked && 'font-bold text-primary-900 dark:text-primary-50'
+                )}
               >
                 {plan.name}
               </RadioGroup.Label>
               <RadioGroup.Description
                 as='span'
-                className='text-gray-500 dark:text-gray-400'
+                className={clsxm(
+                  'text-gray-500 dark:text-gray-400',
+                  checked && 'text-primary-700 dark:text-primary-100'
+                )}
               >
                 <span className='block sm:inline'>{plan.ram} RAM</span>
                 <br className='hidden md:block' />
@@ -86,14 +94,16 @@ export const SpecOption = ({ plan, index }) => {
             as='span'
             className='relative z-[5] mt-2 flex text-sm sm:mt-0 sm:ml-4 sm:flex-col sm:text-right'
           >
-            <span className='font-medium text-gray-900 dark:text-gray-100'>
+            <span className='font-primary font-bold italic tracking-widest text-gray-900 dark:text-gray-100'>
               {plan.price}
             </span>
           </RadioGroup.Description>
           <span
             className={clsxm(
               active ? 'border' : 'border-2',
-              checked ? 'border-indigo-500' : 'border-transparent',
+              checked
+                ? 'border-primary-700 dark:border-primary-300'
+                : 'border-transparent',
               'pointer-events-none absolute -inset-px z-[5] rounded-md'
             )}
             aria-hidden='true'
@@ -104,7 +114,6 @@ export const SpecOption = ({ plan, index }) => {
             }}
             mouseX={mouseX}
             mouseY={mouseY}
-            checked={checked}
           />
         </>
       )}

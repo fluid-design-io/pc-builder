@@ -1,20 +1,18 @@
+import { CallToAction } from '@/IndexPage/CallToAction';
 import { CoverSlider } from '@/IndexPage/CoverSlider';
-import { Services } from '@/IndexPage/Services';
-import { SpecSelector } from '@/IndexPage/SpecSelector';
+import { Faqs } from '@/IndexPage/Faqs';
 import { GetQuote } from '@/IndexPage/GetQuote';
-import { FAQ } from '@/IndexPage/FAQ';
+import { SpecSelector } from '@/IndexPage/SpecSelector';
+import { Testimonials } from '@/IndexPage/Testimonials';
 
 export default function Page() {
   return (
     <main className='mb-12'>
       <CoverSlider />
       <SpecSelector />
-      <section className='layout'>
-        <Services />
-      </section>
-      <section className='layout'>
-        <FAQ />
-      </section>
+      <Testimonials />
+      <CallToAction />
+      <Faqs />
       <section className='layout py-8'>
         <GetQuote />
       </section>
