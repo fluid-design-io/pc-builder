@@ -6,8 +6,10 @@ import { Container } from './Container';
 import { Logo } from './Logo';
 import { MobileNavigation } from './MobileNavigation';
 import { primaryNavigation } from 'lib/navigation';
+import { getAuth } from 'lib/auth';
 
-export function BuildHeader() {
+export async function BuildHeader() {
+  const isSignedIn = await getAuth();
   return (
     <header className='py-10'>
       <Container>
@@ -29,7 +31,7 @@ export function BuildHeader() {
               <NavLink href='/login'>Sign in</NavLink>
             </div>
             <div className='-mr-1 md:hidden'>
-              <MobileNavigation />
+              <MobileNavigation isSignedIn={isSignedIn} />
             </div>
           </div>
         </nav>

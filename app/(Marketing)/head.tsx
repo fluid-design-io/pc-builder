@@ -1,4 +1,4 @@
-import { HeadFavIcon } from '@/core/HeadFavIcon';
+import { HeadDefaultTags } from '@/core/HeadDefaultTags';
 
 export default function Head() {
   return (
@@ -8,12 +8,7 @@ export default function Head() {
         name='description'
         content='Simple Tracker is a simple app to track your orders'
       />
-      <meta
-        content='width=device-width, initial-scale=1, viewport-fit=cover'
-        name='viewport'
-      />
-      <meta charSet='utf-8' />
-      <HeadFavIcon />
+      <HeadDefaultTags />
     </>
   );
 }

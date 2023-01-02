@@ -168,16 +168,15 @@ export const SpecSelector = () => {
 
   return (
     <section
-      className='relative overflow-hidden bg-[#5149E4] pt-20 pb-28 dark:bg-[#1C0E55] sm:py-32'
+      className='relative overflow-hidden bg-[#5759F0] pt-20 pb-28 dark:bg-[#1C0E55] sm:py-32'
       id='features'
       aria-label='Features for building PC'
     >
       <DynamicImage
-        className='absolute top-1/2 left-1/2 hidden max-w-none translate-x-[-44%] translate-y-[-42%] dark:block'
+        className='absolute top-1/2 left-1/2 max-w-none translate-x-[-44%] translate-y-[-42%]'
         src={{ light: backgroundImageLight, dark: backgroundImageDark }}
         width={2245}
         height={1636}
-        unoptimized
         placeholder='blur'
       />
       <Container className='relative mx-auto max-w-md sm:max-w-2xl md:max-w-5xl 2xl:max-w-[96rem]'>

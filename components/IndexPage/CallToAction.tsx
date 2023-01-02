@@ -15,7 +15,6 @@ export function CallToAction() {
         src={{ light: backgroundImageLight, dark: backgroundImageDark }}
         width={2347}
         height={1244}
-        unoptimized
         placeholder='blur'
       />
       <Container className='relative'>

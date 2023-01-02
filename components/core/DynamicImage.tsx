@@ -28,7 +28,7 @@ export const DynamicImage = ({
         {...props}
       />
       <Image
-        className={clsxm(className, 'dark:block')}
+        className={clsxm(className, 'hidden dark:block')}
         src={src.dark}
         alt={alt}
         width={width}

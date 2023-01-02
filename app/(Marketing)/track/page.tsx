@@ -14,7 +14,7 @@ export default function Page() {
       <section
         className={clsxm(
           'index-cover w-full bg-gray-100 dark:bg-gray-700/10',
-          'relative -mt-24'
+          'relative'
         )}
       >
         <IndexCover index={index} />

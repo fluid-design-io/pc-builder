@@ -4,6 +4,7 @@ import backgroundImageLight from '~/assets/images/background-faqs-light.jpg';
 import backgroundImageDark from '~/assets/images/background-faqs-dark.jpg';
 
 import { Container } from '@/core/Container';
+import { DynamicImage } from '@/core/DynamicImage';
 
 const faqs = [
   [
@@ -46,21 +47,12 @@ export function Faqs() {
       aria-labelledby='faq-title'
       className='relative overflow-hidden bg-gray-50 py-20 dark:bg-[#131315] sm:py-32'
     >
-      <Image
-        className='absolute top-0 left-1/2 max-w-none translate-x-[-30%] -translate-y-1/4 dark:hidden'
-        src={backgroundImageLight}
-        alt=''
+      <DynamicImage
+        className='absolute top-0 left-1/2 max-w-none translate-x-[-30%] -translate-y-1/4'
+        src={{ light: backgroundImageLight, dark: backgroundImageDark }}
         width={1558}
         height={946}
-        unoptimized
-      />
-      <Image
-        className='absolute top-0 left-1/2 hidden max-w-none translate-x-[-30%] -translate-y-1/4 dark:block'
-        src={backgroundImageDark}
-        alt=''
-        width={1558}
-        height={946}
-        unoptimized
+        placeholder='blur'
       />
       <Container className='relative'>
         <div className='mx-auto max-w-2xl lg:mx-0'>

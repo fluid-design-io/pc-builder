@@ -84,7 +84,7 @@ export const CoverSlider = () => {
           </p>
           <Button
             href='/build'
-            color='primary'
+            color='gradient'
             className='pointer-events-auto mt-4 rounded-md px-8 py-2.5 text-xl font-bold uppercase tracking-wide'
           >
             Start Build

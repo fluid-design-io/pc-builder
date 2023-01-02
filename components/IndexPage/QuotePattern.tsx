@@ -44,12 +44,12 @@ export const GridPatterns = ({
       </div>
       <motion.div
         className={clsxm(
-          'absolute inset-0 rounded-md bg-gradient-to-r from-primary-100 to-rose-100 opacity-0 transition duration-300 group-hover:opacity-100 dark:from-primary-600/30 dark:to-rose-600/30'
+          'absolute inset-0 rounded-md bg-gradient-to-r from-primary-200/30 to-rose-300/50 opacity-0 transition duration-300 group-hover:opacity-100 dark:from-primary-600/30 dark:to-rose-600/30'
         )}
         style={style}
       />
       <motion.div
-        className='absolute inset-0 rounded-md opacity-0 mix-blend-overlay transition duration-300 group-hover:opacity-100 dark:mix-blend-multiply'
+        className='absolute inset-0 rounded-md opacity-0 mix-blend-multiply transition duration-300 group-hover:opacity-100'
         style={style}
       >
         <GridPattern

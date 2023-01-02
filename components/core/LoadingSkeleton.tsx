@@ -1,8 +1,9 @@
-export const LoadingSkeleton = () => {
+import clsxm from 'lib/clsxm';
+
+export const LoadingSkeleton = ({ className }: { className?: string }) => {
   return (
-    <div>
-      <h1>Loading...</h1>
-      <div className='skeleton-placeholder'>LoadingSkeleton</div>
-    </div>
+    <div
+      className={clsxm('skeleton my-[0.5em] h-[1em] w-full rounded', className)}
+    />
   );
 };

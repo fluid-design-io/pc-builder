@@ -26,6 +26,8 @@ export default function RootLayout({
   return (
     <html lang='en' className={clsxm(primary.variable, inter.variable)}>
       <body>
+        {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
+        {/* @ts-ignore */}
         <BuildHeader />
         {children}
         <Footer />

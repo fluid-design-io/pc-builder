@@ -1,7 +1,15 @@
 import clsxm from 'lib/clsxm';
 import Image from 'next/image';
 
-export const IndexCover = ({ index }: { index: number }) => {
+export const IndexCover = ({
+  index,
+  className,
+  ...props
+}: {
+  index: number;
+  className?: string;
+  [key: string]: any;
+}) => {
   const dataURLs = [
     {
       index: 1,
@@ -33,10 +41,12 @@ export const IndexCover = ({ index }: { index: number }) => {
         height={2000}
         className={clsxm(
           'index-cover object-cover object-center',
-          'bg-white [mask-image:linear-gradient(270deg,rgba(255,255,255,0.85)_20%,rgba(255,255,255,0))] dark:bg-gray-700'
+          'bg-white [mask-image:linear-gradient(270deg,rgba(255,255,255,0.85)_20%,rgba(255,255,255,0))] dark:bg-gray-700',
+          className
         )}
         placeholder='blur'
         blurDataURL={`data:image/webp;base64,${dataURLs[index - 1].dataURL}`}
+        {...props}
       />
     </div>
   );

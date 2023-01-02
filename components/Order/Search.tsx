@@ -1,17 +1,17 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 
 export const Search = () => {
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState('');
   const router = useRouter();
   return (
     <form
       onSubmit={(e) => {
         e.preventDefault();
-        router.push(`/order/${search}`);
+        router.push(`/orders/${search}`);
       }}
     >
       <div className='relative flex items-stretch gap-4 p-1 pl-4'>
