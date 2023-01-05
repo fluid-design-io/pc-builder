@@ -7,6 +7,7 @@ import 'swiper/swiper-bundle.min.css';
 import { Footer } from '@/core/Footer';
 import { BuildHeader } from '@/core/BuildHeader';
 import clsxm from 'lib/clsxm';
+import { AppProvider } from 'lib/AppProvider';
 
 const inter = Inter({
   variable: '--font-inter',
@@ -26,11 +27,13 @@ export default function RootLayout({
   return (
     <html lang='en' className={clsxm(primary.variable, inter.variable)}>
       <body>
-        {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
-        {/* @ts-ignore */}
-        <BuildHeader />
-        {children}
-        <Footer />
+        <AppProvider>
+          {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
+          {/* @ts-ignore */}
+          <BuildHeader />
+          {children}
+          <Footer />
+        </AppProvider>
       </body>
     </html>
   );

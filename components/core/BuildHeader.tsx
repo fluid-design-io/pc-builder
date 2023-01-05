@@ -1,14 +1,15 @@
+import { getAuth } from 'lib/auth';
+import { primaryNavigation } from 'lib/navigation';
 import Link from 'next/link';
 
 import { NavLink } from '@/links/NavLink';
 
+import { AccountNavigation } from './AccountNavigation';
 import { Container } from './Container';
 import { Logo } from './Logo';
 import { MobileNavigation } from './MobileNavigation';
-import { primaryNavigation } from 'lib/navigation';
-import { getAuth } from 'lib/auth';
 
-export async function BuildHeader() {
+export async function BuildHeader({ theme = 'auto' }) {
   const isSignedIn = await getAuth();
   return (
     <header className='py-10'>
@@ -28,7 +29,7 @@ export async function BuildHeader() {
           </div>
           <div className='flex items-center gap-x-5 md:gap-x-8'>
             <div className='hidden md:block'>
-              <NavLink href='/login'>Sign in</NavLink>
+              <AccountNavigation isSignedIn={isSignedIn} theme={theme} />
             </div>
             <div className='-mr-1 md:hidden'>
               <MobileNavigation isSignedIn={isSignedIn} />

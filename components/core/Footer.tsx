@@ -105,7 +105,7 @@ export const Footer = () => {
           ))}
         </div>
         <p className='mt-8 text-center text-xs text-gray-400 dark:text-gray-600'>
-          &copy; 2020 Your Company, Inc. All rights reserved.
+          &copy; 2023 PCB, Inc. All rights reserved.
         </p>
       </div>
     </footer>

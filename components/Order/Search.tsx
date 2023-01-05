@@ -22,6 +22,7 @@ export const Search = () => {
           className='w-full border-none bg-transparent py-2.5 pl-0 font-normal tracking-tight text-gray-900 outline-none focus:outline-none focus:ring-0 dark:text-gray-50 sm:p-4 sm:text-lg lg:text-xl xl:text-2xl'
           value={search}
           onChange={(e) => setSearch(e.target.value)}
+          autoFocus
         />
         <button
           type='submit'

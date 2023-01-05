@@ -26,11 +26,10 @@ const getOrderItems = async ({ auth, orderId }) => {
 };
 
 const UserOrderItem = ({ product }) => {
-  console.log(product);
   return (
     <li key={product.id} className='p-4 sm:p-6'>
       <div className='flex items-center sm:items-start'>
-        <div className='h-12 w-12 flex-shrink-0 overflow-hidden rounded-md bg-gray-200 dark:border-gray-600/40 sm:h-40 sm:w-40'>
+        <div className='h-12 w-12 flex-shrink-0 overflow-hidden rounded-md bg-gray-200 dark:border-gray-600/40 sm:h-16 sm:w-16'>
           <div className='h-full w-full object-cover object-center' />
         </div>
         <div className='ml-6 flex-1 text-sm'>
@@ -38,34 +37,34 @@ const UserOrderItem = ({ product }) => {
             <h5>{product.name}</h5>
             <p className='mt-2 sm:mt-0'>${product.price / 100}</p>
           </div>
-          <p className='hidden text-gray-500 dark:text-gray-300 sm:mt-2 sm:block'>
-            {product.description}
-          </p>
-        </div>
-      </div>
+          <div className='mt-6 sm:flex sm:justify-between'>
+            <div className='flex flex-1 items-center'>
+              {product.expand?.status?.length > 0 && (
+                <Fragment>
+                  <CheckCircleIcon
+                    className='h-5 w-5 text-green-500'
+                    aria-hidden='true'
+                  />
+                  <p className='ml-1 text-sm font-medium text-gray-500 dark:text-gray-300'>
+                    {
+                      product.expand?.status[product.expand?.status.length - 1]
+                        .status
+                    }
+                  </p>
+                </Fragment>
+              )}
+            </div>
 
-      <div className='mt-6 sm:flex sm:justify-between'>
-        <div className='flex items-center'>
-          <CheckCircleIcon
-            className='h-5 w-5 text-green-500'
-            aria-hidden='true'
-          />
-          <p className='ml-2 text-sm font-medium text-gray-500 dark:text-gray-300'>
-            Delivered on{' '}
-            {/* <time dateTime={order.deliveredDatetime}>
-              {order.deliveredDate}
-            </time> */}
-          </p>
-        </div>
-
-        <div className='mt-6 flex items-center space-x-4 divide-x divide-gray-200 border-t border-gray-200 pt-4 text-sm font-medium dark:divide-gray-600/40 dark:border-gray-600/40 sm:mt-0 sm:ml-4 sm:border-none sm:pt-0'>
-          <div className='flex flex-1 justify-center'>
-            <a
-              href={product.href}
-              className='whitespace-nowrap text-primary-600 hover:text-primary-500 dark:text-primary-400'
-            >
-              Product support
-            </a>
+            <div className='mt-6 flex items-center space-x-4 divide-x divide-gray-100 border-t border-gray-100 pt-4 text-sm font-medium dark:divide-gray-600/40 dark:border-gray-600/40 sm:mt-0 sm:ml-4 sm:border-none sm:pt-0'>
+              <div className='flex flex-1 justify-center'>
+                <a
+                  href={product.href}
+                  className='whitespace-nowrap text-primary-600 hover:text-primary-500 dark:text-primary-400'
+                >
+                  Product support
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -81,7 +80,7 @@ const UserOrderItems = async ({ orderId }) => {
   return (
     <ul
       role='list'
-      className='divide-y divide-gray-200 dark:divide-gray-600/40'
+      className='divide-y divide-gray-100 dark:divide-gray-600/40'
     >
       {orderItems.map((orderItem) => (
         <UserOrderItem key={`order-item-${orderItem.id}`} product={orderItem} />
@@ -114,7 +113,7 @@ export const UserOrders = async ({ promise }) => {
             <time dateTime={order.created}>{formatDate(order.created)}</time>
           </h3>
 
-          <div className='flex items-center border-b border-gray-200 p-4 sm:grid sm:grid-cols-4 sm:gap-x-6 sm:p-6'>
+          <div className='flex items-center border-b border-gray-100 p-4 dark:border-gray-600/40 sm:grid sm:grid-cols-4 sm:gap-x-6 sm:p-6'>
             <dl className='grid flex-1 grid-cols-2 gap-x-6 text-sm sm:col-span-3 sm:grid-cols-3 lg:col-span-2'>
               <div>
                 <dt className='font-medium text-gray-900 dark:text-gray-100'>
@@ -164,7 +163,7 @@ export const UserOrders = async ({ promise }) => {
 
 export const UserOrderSkeleton = () => (
   <div className='card-secondary'>
-    <div className='flex items-center border-b border-gray-200 p-4 sm:grid sm:grid-cols-4 sm:gap-x-6 sm:p-6'>
+    <div className='flex items-center border-b border-gray-100 p-4 sm:grid sm:grid-cols-4 sm:gap-x-6 sm:p-6'>
       <dl className='grid flex-1 grid-cols-2 gap-x-6 text-sm sm:col-span-3 sm:grid-cols-3 lg:col-span-2'>
         <div>
           <dt className='font-medium text-gray-900 dark:text-gray-100'>
@@ -201,11 +200,11 @@ export const UserOrderSkeleton = () => (
     <h4 className='sr-only'>Items</h4>
     <ul
       role='list'
-      className='divide-y divide-gray-200 dark:divide-gray-600/40'
+      className='divide-y divide-gray-100 dark:divide-gray-600/40'
     >
       <li className='p-4 sm:p-6'>
         <div className='flex items-center sm:items-start'>
-          <div className='h-12 w-12 flex-shrink-0 overflow-hidden rounded-md bg-gray-200 dark:border-gray-600/40 sm:h-40 sm:w-40'>
+          <div className='h-12 w-12 flex-shrink-0 overflow-hidden rounded-md bg-gray-200 dark:border-gray-600/40 sm:h-16 sm:w-16'>
             <div className='h-full w-full object-cover object-center' />
           </div>
           <div className='ml-6 flex-1 text-sm'>
@@ -217,9 +216,6 @@ export const UserOrderSkeleton = () => (
                 <LoadingSkeleton className='w-12' />
               </p>
             </div>
-            <p className='hidden text-gray-500 dark:text-gray-300 sm:mt-2 sm:block'>
-              <LoadingSkeleton className='w-2/3' />
-            </p>
           </div>
         </div>
 
@@ -231,7 +227,7 @@ export const UserOrderSkeleton = () => (
             </p>
           </div>
 
-          <div className='mt-6 flex items-center space-x-4 divide-x divide-gray-200 border-t border-gray-200 pt-4 text-sm font-medium dark:divide-gray-600/40 dark:border-gray-600/40 sm:mt-0 sm:ml-4 sm:border-none sm:pt-0'>
+          <div className='mt-6 flex items-center space-x-4 divide-x divide-gray-100 border-t border-gray-100 pt-4 text-sm font-medium dark:divide-gray-600/40 dark:border-gray-600/40 sm:mt-0 sm:ml-4 sm:border-none sm:pt-0'>
             <div className='flex flex-1 justify-center'>
               <LoadingSkeleton className='w-24' />
             </div>

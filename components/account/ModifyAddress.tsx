@@ -10,7 +10,7 @@ import {
   ModalContainer,
   ModalDescription,
   ModalFooter,
-  ModelHeader,
+  ModalHeader,
   useModal,
 } from 'lib/useModal';
 import { useToast } from 'lib/useToast';
@@ -25,7 +25,7 @@ const ConfirmCancelModal = ({ onConfirm, dismiss }) => {
   return (
     <ModalContainer>
       <ModalBody>
-        <ModelHeader>Are you sure?</ModelHeader>
+        <ModalHeader>Are you sure?</ModalHeader>
         <p>
           You have unsaved changes. Are you sure you want to cancel? All unsaved
           changes will be lost.
@@ -123,7 +123,7 @@ const EditAddressModal = ({ address, dismiss, isNew = false, onClose }) => {
     <ModalContainer>
       <form action='#'>
         <ModalBody>
-          <ModelHeader>{isNew ? 'Add' : 'Edit'} Address</ModelHeader>
+          <ModalHeader>{isNew ? 'Add' : 'Edit'} Address</ModalHeader>
           {isNew ? (
             <ModalDescription>
               Add a new address to your account
@@ -210,7 +210,7 @@ const ConfirmDeleteModal = ({ address, dismiss }) => {
   return (
     <ModalContainer>
       <ModalBody>
-        <ModelHeader>Are you sure?</ModelHeader>
+        <ModalHeader>Are you sure?</ModalHeader>
         <ModalDescription>
           Are you sure you want to delete this address?
         </ModalDescription>

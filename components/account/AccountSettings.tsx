@@ -9,7 +9,7 @@ import {
   ModalContainer,
   ModalDescription,
   ModalFooter,
-  ModelHeader,
+  ModalHeader,
   useModal,
 } from 'lib/useModal';
 import { useToast } from 'lib/useToast';
@@ -33,7 +33,7 @@ const ConfirmDeleteModal = ({ user, dismiss }) => {
   return (
     <ModalContainer>
       <ModalBody>
-        <ModelHeader>Are you sure?</ModelHeader>
+        <ModalHeader>Are you sure?</ModalHeader>
         <ModalDescription>
           This action cannot be undone. All of your data will be permanently
           removed from our servers forever. This action is irreversible.

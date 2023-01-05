@@ -1,16 +1,20 @@
 import clsxm from 'lib/clsxm';
-import { pb } from 'lib/pb';
 import { Suspense } from 'react';
 
 import { OrderStatusSekelton } from './OrderItemsSkeleton';
 
-export const OrderStatus = async ({ orderStatuses }) => {
+export const OrderStatus = async ({ className = '', orderStatuses }) => {
   if (!orderStatuses)
     return <h4 className='w-full text-center'>Order Statuses not found</h4>;
   const progress = orderStatuses.length;
   const activeStyles = 'text-primary-600 dark:text-primary-400';
   return (
-    <div className='border-t border-gray-200 py-6 px-4 dark:border-gray-700 sm:px-6 lg:p-8'>
+    <div
+      className={clsxm(
+        'border-t border-gray-200 py-6 px-4 dark:border-gray-700 sm:px-6 lg:p-8',
+        className
+      )}
+    >
       <h4 className='sr-only'>Status</h4>
       <Suspense fallback={<OrderStatusSekelton />}>
         <p className='text-sm font-medium'>
@@ -31,16 +35,16 @@ export const OrderStatus = async ({ orderStatuses }) => {
           <div className='mt-6 hidden grid-cols-5 text-sm font-medium text-gray-600 dark:text-gray-400 sm:grid'>
             <div className={activeStyles}>Order placed</div>
             <div className={clsxm('text-center', progress > 1 && activeStyles)}>
-              Processing
+              {orderStatuses[1]?.status || 'Processing'}
             </div>
             <div className={clsxm('text-center', progress > 2 && activeStyles)}>
-              Building
+              {orderStatuses[2]?.status || 'Building'}
             </div>
             <div className={clsxm('text-center', progress > 3 && activeStyles)}>
-              Testing
+              {orderStatuses[3]?.status || 'Testing'}
             </div>
             <div className={clsxm('text-right', progress > 4 && activeStyles)}>
-              Delivered
+              {orderStatuses[4]?.status || 'Shipped'}
             </div>
           </div>
         </div>

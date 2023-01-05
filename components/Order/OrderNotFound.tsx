@@ -1,17 +1,17 @@
-import { MagnifyingGlassCircleIcon } from "@heroicons/react/24/outline";
-import Link from "next/link";
+import UnderlineLink from '@/links/UnderlineLink';
+import { MagnifyingGlassCircleIcon } from '@heroicons/react/24/outline';
 
-export const OrderNotFound = ({ id }) => {
+export const OrderNotFound = () => {
   return (
     <div className='text-center'>
-      <MagnifyingGlassCircleIcon className='w-12 md:w-16 h-12 md:h-16 mx-auto text-gray-400' />
-      <h1>Order not found</h1>
+      <MagnifyingGlassCircleIcon className='mx-auto h-12 w-12 text-gray-400 md:h-16 md:w-16' />
+      <h1 className='mb-4'>Order not found</h1>
       <p>
-        Order {id} does not exist. Please check your order number and try again.
+        Order does not exist. Please check your order number and try again.
         <br />
-        <Link href='/' className='link-primary'>
+        <UnderlineLink href='/' className='mt-4'>
           Go back to home
-        </Link>
+        </UnderlineLink>
       </p>
     </div>
   );

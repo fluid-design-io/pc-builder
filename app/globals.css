@@ -88,6 +88,9 @@ html {
   .bg-dark a.custom-link {
     @apply border-gray-200 hover:border-gray-200/0;
   }
+  .min-h-page {
+    @apply min-h-[calc(100vh-441px)];
+  }
 }
 
 @layer components {
@@ -95,10 +98,10 @@ html {
     @apply rounded bg-primary-500 text-white transition-colors duration-300 hover:bg-primary-400 active:bg-primary-600 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-primary-700 dark:hover:bg-primary-600 dark:active:bg-primary-800;
   }
   .order-layout-wrap {
-    @apply layout flex min-h-screen w-full flex-col items-stretch justify-center;
+    @apply layout min-h-page flex w-full flex-col items-stretch justify-center;
   }
   .order-layout {
-    @apply bg-secondary my-4 grid min-h-[calc(100vh-4rem)] w-full flex-shrink-0 place-items-center gap-4 rounded-lg p-4 sm:p-8 md:gap-6 md:p-10 lg:gap-8 lg:p-12;
+    @apply bg-secondary min-h-page my-4 grid w-full flex-shrink-0 place-items-center gap-4 rounded-lg p-4 sm:p-8 md:gap-6 md:p-10 lg:gap-8 lg:p-12;
   }
 }
 

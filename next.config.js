@@ -20,7 +20,7 @@ const nextConfig = {
     appDir: true,
   },
   images: {
-    domains: ['api.mapbox.com'],
+    domains: ['api.mapbox.com', '127.0.0.1', 'localhost', 'pc-builder-eta.vercel.app'],
   },
 };
 

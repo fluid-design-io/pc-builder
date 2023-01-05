@@ -56,10 +56,10 @@ const plans = [
     name: PC_TIER.TIER_1,
     ram: '16GB',
     gpu: 'RTX 2060 Ti 6GB',
-    disk: '160 GB SSD',
+    disk: '256 GB SSD',
     price: '$1540',
     specs: {
-      options: { graphics: 82, processor: 80, memory: 70, storage: 54 },
+      options: { graphics: 82, processor: 80, memory: 70, storage: 45 },
       description:
         'A great choice for casual gamers who want to play the latest games at 1080p. This PC should be able to run most games at 60 FPS.',
     },
@@ -75,7 +75,7 @@ const plans = [
         graphics: 90,
         processor: 90,
         memory: 80,
-        storage: 70,
+        storage: 75,
       },
       description:
         'For gamers who want to play the latest games at 1440p with high settings. This PC spec is designed with the latest games in mind.',
@@ -88,7 +88,7 @@ const plans = [
     disk: '1024 GB SSD',
     price: '$3440',
     specs: {
-      options: { graphics: 97, processor: 92, memory: 90, storage: 90 },
+      options: { graphics: 97, processor: 92, memory: 90, storage: 85 },
       description:
         'For professional gamers who want to play the latest games at 4K. A non-compromising PC spec for the most demanding gamers.',
     },

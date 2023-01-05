@@ -3,10 +3,12 @@
 import { Menu, Transition } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
 import clsxm from 'lib/clsxm';
+import { useUser } from 'lib/useUser';
+import Link from 'next/link';
 import { Fragment } from 'react';
 
 import { NavLink } from '@/links/NavLink';
-import Link from 'next/link';
+
 import { MobileNavLink } from './MobileNavigation';
 
 const accountNavigation = [
@@ -18,6 +20,7 @@ const accountNavigation = [
 ];
 
 export const AccountNavigation = ({ isSignedIn, theme = 'auto' }) => {
+  const { user } = useUser();
   if (isSignedIn) {
     return (
       <div className='hidden md:block'>
@@ -49,7 +52,9 @@ export const AccountNavigation = ({ isSignedIn, theme = 'auto' }) => {
             <Menu.Items className='absolute right-0 z-10 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:divide-gray-700 dark:bg-gray-900 dark:ring-white dark:ring-opacity-10'>
               <div className='px-4 py-3'>
                 <p className='text-sm'>Signed in as</p>
-                <p className='truncate text-sm font-medium'>tom@example.com</p>
+                <p className='truncate text-sm font-medium'>
+                  {user.record.email}
+                </p>
               </div>
               {accountNavigation.map((group, groupIdx) => (
                 <div key={`acc-navgroup-${groupIdx}`} className='py-1'>

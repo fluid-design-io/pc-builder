@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import { OrderNotFound } from '@/Order/OrderNotFound';
+import { BACKEND_URL } from 'lib/pb';
+import { cookies } from 'next/headers';
+import { notFound } from 'next/navigation';
+import { Suspense } from 'react';
 
 import { Container } from '@/core/Container';
 import ArrowLink from '@/links/ArrowLink';
 import { OrderItems } from '@/Order/OrderItems';
-import { Suspense } from 'react';
 import { OrderItemsSkeleton } from '@/Order/OrderItemsSkeleton';
-import { BACKEND_URL } from 'lib/pb';
-import { cookies } from 'next/headers';
 
 const getOrder = async ({ id }) => {
   const authCookie = cookies().get('pb_auth');
@@ -31,15 +31,10 @@ const getOrder = async ({ id }) => {
 };
 
 export default async function Page({ params: { id } }) {
-  const order = await getOrder({ id });
-  if (!order) {
-    return (
-      <main className='order-layout-wrap'>
-        <section className='order-layout'>
-          <OrderNotFound id={id} />
-        </section>
-      </main>
-    );
+  const orderData = await getOrder({ id });
+  const order = orderData?.data;
+  if (Object.keys(order).length === 0) {
+    notFound();
   }
   const orderDate = new Date(order.created).toLocaleDateString();
   return (
