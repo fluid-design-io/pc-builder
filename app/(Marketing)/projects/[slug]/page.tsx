@@ -32,6 +32,9 @@ const getPosts = async () => {
 
 export async function generateStaticParams() {
   const posts = await getPosts();
+  if (!posts || !posts.items) {
+    return [];
+  }
   return posts.items.map((post) => ({
     slug: post.slug,
   }));

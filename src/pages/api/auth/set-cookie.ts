@@ -1,4 +1,3 @@
-import { pb } from 'lib/pb';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function handler(
