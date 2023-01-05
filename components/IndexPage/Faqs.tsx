@@ -54,7 +54,7 @@ export function Faqs() {
         height={946}
         placeholder='blur'
       />
-      <Container className='relative'>
+      <Container as='div' className='relative'>
         <div className='mx-auto max-w-2xl lg:mx-0'>
           <h2 id='faq-title'>Frequently asked questions</h2>
           <p className='mt-4 text-lg tracking-tight'>

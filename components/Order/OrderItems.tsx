@@ -71,7 +71,7 @@ export const OrderItems = async ({ order }) => {
                       </span>
                     </dd>
                   ) : (
-                    <p className='mt-4 rounded border border-dashed border-gray-200 p-4 dark:border-gray-800'>
+                    <p className='mt-4 rounded border border-dashed border-gray-100 p-4 dark:border-gray-800'>
                       Please <PrimaryLink href='/login'>sign in</PrimaryLink> to
                       view your delivery address or edit shipping details.
                     </p>

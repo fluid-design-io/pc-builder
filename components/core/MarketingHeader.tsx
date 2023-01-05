@@ -14,7 +14,7 @@ export async function MarketingHeader({ theme = 'auto' }) {
   const isSignedIn = await getAuth();
   return (
     <header className='py-10'>
-      <Container>
+      <Container as='div'>
         <nav className='relative z-50 flex justify-between'>
           <div className='flex items-center md:gap-x-12'>
             <Link href='/' aria-label='Home'>

@@ -179,7 +179,10 @@ export const SpecSelector = () => {
         height={1636}
         placeholder='blur'
       />
-      <Container className='relative mx-auto max-w-md sm:max-w-2xl md:max-w-5xl 2xl:max-w-[96rem]'>
+      <Container
+        as='div'
+        className='relative mx-auto max-w-md sm:max-w-2xl md:max-w-5xl 2xl:max-w-[96rem]'
+      >
         <h1 className='mb-12 text-center text-white lg:mb-16'>
           Which is right for you?
         </h1>

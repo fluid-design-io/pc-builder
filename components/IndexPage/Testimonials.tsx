@@ -59,71 +59,69 @@ function QuoteIcon(props) {
 
 export function Testimonials() {
   return (
-    <section
+    <Container
       id='testimonials'
       aria-label='What our customers are saying'
       className='py-20 sm:py-32'
     >
-      <Container>
-        <div className='mx-auto max-w-2xl md:text-center'>
-          <h2>Loved by our customers.</h2>
-          <p className='mt-4 text-lg tracking-tight'>
-            We only build and ship products that our customers love. Our
-            customers love us. We love them. It’s a beautiful relationship.
-          </p>
-        </div>
-        <ul
-          role='list'
-          className='mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-6 sm:gap-8 lg:mt-20 lg:max-w-none lg:grid-cols-3'
-        >
-          {testimonials.map((column, columnIndex) => (
-            <li key={columnIndex}>
-              <ul role='list' className='flex flex-col gap-y-6 sm:gap-y-8'>
-                {column.map((testimonial, testimonialIndex) => (
-                  <li key={testimonialIndex}>
-                    <figure className='card-secondary card-secondary-hover relative'>
-                      <QuoteIcon className='absolute top-6 left-6 fill-gray-100 dark:fill-gray-500/20' />
-                      <div className='relative'>
+      <div className='mx-auto max-w-2xl md:text-center'>
+        <h2>Loved by our customers.</h2>
+        <p className='mt-4 text-lg tracking-tight'>
+          We only build and ship products that our customers love. Our customers
+          love us. We love them. It’s a beautiful relationship.
+        </p>
+      </div>
+      <ul
+        role='list'
+        className='mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-6 sm:gap-8 lg:mt-20 lg:max-w-none lg:grid-cols-3'
+      >
+        {testimonials.map((column, columnIndex) => (
+          <li key={columnIndex}>
+            <ul role='list' className='flex flex-col gap-y-6 sm:gap-y-8'>
+              {column.map((testimonial, testimonialIndex) => (
+                <li key={testimonialIndex}>
+                  <figure className='card-secondary card-secondary-hover relative'>
+                    <QuoteIcon className='absolute top-6 left-6 fill-gray-100 dark:fill-gray-500/20' />
+                    <div className='relative'>
+                      <Image
+                        className='mb-2 w-full rounded object-cover'
+                        src={testimonial.author.postImage}
+                        alt=''
+                        placeholder='blur'
+                      />
+                    </div>
+                    <blockquote className='relative'>
+                      <p className='text-lg tracking-tight dark:text-gray-100'>
+                        {testimonial.content}
+                      </p>
+                    </blockquote>
+                    <figcaption className='relative mt-6 flex items-center justify-between border-t border-gray-100 pt-6 dark:border-gray-700'>
+                      <div>
+                        <div className='font-display text-base'>
+                          {testimonial.author.name}
+                        </div>
+                        <div className='mt-1 text-sm text-gray-500 dark:text-gray-400'>
+                          {testimonial.author.role}
+                        </div>
+                      </div>
+                      <div className='overflow-hidden rounded-full bg-gray-50'>
                         <Image
-                          className='mb-2 w-full rounded object-cover'
-                          src={testimonial.author.postImage}
+                          className='h-14 w-14 object-cover'
+                          src={testimonial.author.image}
                           alt=''
+                          width={56}
+                          height={56}
                           placeholder='blur'
                         />
                       </div>
-                      <blockquote className='relative'>
-                        <p className='text-lg tracking-tight dark:text-gray-100'>
-                          {testimonial.content}
-                        </p>
-                      </blockquote>
-                      <figcaption className='relative mt-6 flex items-center justify-between border-t border-gray-100 pt-6 dark:border-gray-700'>
-                        <div>
-                          <div className='font-display text-base'>
-                            {testimonial.author.name}
-                          </div>
-                          <div className='mt-1 text-sm text-gray-500 dark:text-gray-400'>
-                            {testimonial.author.role}
-                          </div>
-                        </div>
-                        <div className='overflow-hidden rounded-full bg-gray-50'>
-                          <Image
-                            className='h-14 w-14 object-cover'
-                            src={testimonial.author.image}
-                            alt=''
-                            width={56}
-                            height={56}
-                            placeholder='blur'
-                          />
-                        </div>
-                      </figcaption>
-                    </figure>
-                  </li>
-                ))}
-              </ul>
-            </li>
-          ))}
-        </ul>
-      </Container>
-    </section>
+                    </figcaption>
+                  </figure>
+                </li>
+              ))}
+            </ul>
+          </li>
+        ))}
+      </ul>
+    </Container>
   );
 }

@@ -15,7 +15,7 @@ const getOrder = async ({ id }) => {
   try {
     // also pass expand=address to get the address
     const res = await fetch(
-      `${BACKEND_URL}/api/collections/orders/records/${id}?expand=address,recipient`,
+      `${BACKEND_URL}/api/collections/orders/records/${id}?expand=recipient`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -31,30 +31,26 @@ const getOrder = async ({ id }) => {
 };
 
 export default async function Page({ params: { id } }) {
-  const orderData = await getOrder({ id });
-  const order = orderData?.data;
-  if (Object.keys(order).length === 0) {
+  const order = await getOrder({ id });
+  if (!order) {
     notFound();
   }
   const orderDate = new Date(order.created).toLocaleDateString();
   return (
     <main className=''>
-      <Container>
+      <Container className='relative z-10 mt-20 px-4 pb-6 sm:px-6 md:mt-16 lg:px-8 lg:pb-16'>
         <div className='space-y-2 px-4 sm:flex sm:items-baseline sm:justify-between sm:space-y-0 sm:px-0'>
           <div className='flex sm:items-baseline sm:space-x-4'>
-            <h1 className='text-2xl font-bold tracking-wide sm:text-3xl'>
+            <h1 className='text-2xl font-bold tracking-wide text-primary-50 sm:text-3xl'>
               Order #{order.id}
             </h1>
-            <ArrowLink href='#' className='hidden sm:flex'>
+            {/* <ArrowLink href='#' className='hidden sm:flex text-gray-200'>
               View invoice
-            </ArrowLink>
+            </ArrowLink> */}
           </div>
-          <p className='text-sm text-gray-600 dark:text-gray-300'>
+          <p className='text-sm text-primary-100'>
             Order placed{' '}
-            <time
-              dateTime={orderDate}
-              className='font-medium text-gray-900 dark:text-gray-100'
-            >
+            <time dateTime={orderDate} className='font-medium text-primary-50'>
               {orderDate}
             </time>
           </p>

@@ -15,8 +15,20 @@ export const ProjectCard = ({ post }) => {
             height={450}
           />
         </div>
-        <div className='p-4'>
+        <div className='p-4 pb-2'>
           <h3>{post.title}</h3>
+          <div className='mt-4 border-t border-gray-100 pt-1 dark:border-gray-600/40'>
+            <time
+              dateTime={post.created}
+              className='text-sm text-gray-500 dark:text-gray-400'
+            >
+              {new Date(post.created).toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+              })}
+            </time>
+          </div>
         </div>
       </div>
     </Link>

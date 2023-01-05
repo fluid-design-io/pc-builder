@@ -17,7 +17,7 @@ export function CallToAction() {
         height={1244}
         placeholder='blur'
       />
-      <Container className='relative'>
+      <Container as='div' className='relative'>
         <div className='mx-auto max-w-lg text-center'>
           <h2 className='font-display text-3xl tracking-tight text-white sm:text-4xl'>
             Start your build today

@@ -1,11 +1,12 @@
 import { BACKEND_URL } from 'lib/pb';
+import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { serialize } from 'next-mdx-remote/serialize';
+import remarkGfm from 'remark-gfm';
 
 import { Container } from '@/core/Container';
-import Image from 'next/image';
+
 import { ArticleContent } from './ArticleContent';
-import remarkGfm from 'remark-gfm';
 
 const getPostBySlug = async ({ slug }) => {
   try {
@@ -39,6 +40,8 @@ export async function generateStaticParams() {
     slug: post.slug,
   }));
 }
+
+process.env.NODE_ENV !== 'production' && generateStaticParams();
 
 export default async function Page({ params: { slug } }) {
   const postData = await getPostBySlug({ slug });

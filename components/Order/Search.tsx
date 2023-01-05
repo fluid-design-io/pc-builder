@@ -1,8 +1,10 @@
 'use client';
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+
+import { Button } from '@/buttons/AppButton';
 
 export const Search = () => {
   const [search, setSearch] = useState('');
@@ -19,18 +21,19 @@ export const Search = () => {
         <input
           type='text'
           placeholder='Your order number'
-          className='w-full border-none bg-transparent py-2.5 pl-0 font-normal tracking-tight text-gray-900 outline-none focus:outline-none focus:ring-0 dark:text-gray-50 sm:p-4 sm:text-lg lg:text-xl xl:text-2xl'
+          className='w-full border-none bg-transparent pl-0 font-normal tracking-tight text-gray-900 outline-none focus:outline-none focus:ring-0 dark:text-gray-50 sm:p-4 sm:text-lg lg:text-xl'
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           autoFocus
         />
-        <button
+        <Button
           type='submit'
-          className='primary-btn flex flex-1 items-center justify-center px-6 font-semibold md:px-8'
+          color='primary'
+          className='px-6 md:px-8 lg:px-10'
           disabled={search.length === 0}
         >
           Track
-        </button>
+        </Button>
       </div>
     </form>
   );

@@ -8,10 +8,11 @@ export const OrderStatus = async ({ className = '', orderStatuses }) => {
     return <h4 className='w-full text-center'>Order Statuses not found</h4>;
   const progress = orderStatuses.length;
   const activeStyles = 'text-primary-600 dark:text-primary-400';
+  const inactiveStyles = 'text-gray-500 dark:text-gray-400';
   return (
     <div
       className={clsxm(
-        'border-t border-gray-200 py-6 px-4 dark:border-gray-700 sm:px-6 lg:p-8',
+        'border-t border-gray-100 py-6 px-4 dark:border-gray-700 sm:px-6 lg:p-8',
         className
       )}
     >
@@ -24,9 +25,9 @@ export const OrderStatus = async ({ className = '', orderStatuses }) => {
           </time>
         </p>
         <div className='mt-6' aria-hidden='true'>
-          <div className='overflow-hidden rounded-full bg-gray-200'>
+          <div className='overflow-hidden rounded-full bg-gray-100'>
             <div
-              className='h-2 rounded-full bg-primary-600 dark:bg-primary-500'
+              className='h-2 rounded-full bg-primary-500 dark:bg-primary-500'
               style={{
                 width: `calc((${progress} * 2) / 10 * 100%)`,
               }}
@@ -34,16 +35,36 @@ export const OrderStatus = async ({ className = '', orderStatuses }) => {
           </div>
           <div className='mt-6 hidden grid-cols-5 text-sm font-medium text-gray-600 dark:text-gray-400 sm:grid'>
             <div className={activeStyles}>Order placed</div>
-            <div className={clsxm('text-center', progress > 1 && activeStyles)}>
+            <div
+              className={clsxm(
+                'text-center',
+                progress > 1 ? activeStyles : inactiveStyles
+              )}
+            >
               {orderStatuses[1]?.status || 'Processing'}
             </div>
-            <div className={clsxm('text-center', progress > 2 && activeStyles)}>
+            <div
+              className={clsxm(
+                'text-center',
+                progress > 2 ? activeStyles : inactiveStyles
+              )}
+            >
               {orderStatuses[2]?.status || 'Building'}
             </div>
-            <div className={clsxm('text-center', progress > 3 && activeStyles)}>
+            <div
+              className={clsxm(
+                'text-center',
+                progress > 3 ? activeStyles : inactiveStyles
+              )}
+            >
               {orderStatuses[3]?.status || 'Testing'}
             </div>
-            <div className={clsxm('text-right', progress > 4 && activeStyles)}>
+            <div
+              className={clsxm(
+                'text-right',
+                progress > 4 ? activeStyles : inactiveStyles
+              )}
+            >
               {orderStatuses[4]?.status || 'Shipped'}
             </div>
           </div>

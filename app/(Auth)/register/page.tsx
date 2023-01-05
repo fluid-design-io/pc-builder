@@ -1,8 +1,10 @@
 'use client';
 
+import HCaptcha from '@hcaptcha/react-hcaptcha';
 import { ChevronRightIcon } from '@heroicons/react/20/solid';
 import clsxm from 'lib/clsxm';
 import { pb } from 'lib/pb';
+import { useToast } from 'lib/useToast';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
@@ -10,8 +12,6 @@ import { useState } from 'react';
 import { Button } from '@/buttons/AppButton';
 import { Logo } from '@/core/Logo';
 import { TextField } from '@/form/Fields';
-import HCaptcha from '@hcaptcha/react-hcaptcha';
-import { useToast } from 'lib/useToast';
 
 export default function Register() {
   const router = useRouter();
@@ -24,7 +24,8 @@ export default function Register() {
   const disabled =
     identity === '' ||
     password === '' ||
-    password !== passwordConfirm; /* || !isCapchaVerified */
+    password !== passwordConfirm ||
+    !isCapchaVerified;
   const regester = async (e) => {
     e.preventDefault();
     const res = await pb
