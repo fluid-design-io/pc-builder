@@ -1,8 +1,9 @@
 import { BACKEND_URL } from 'lib/pb';
 import { getAuth } from 'lib/auth';
 import { AccountSettings } from '@/account/AccountSettings';
+import { BaseAuthStore } from 'pocketbase';
 
-const getUser = async ({ auth }) => {
+const getUser = async ({ auth }: { auth: BaseAuthStore }) => {
   if (!auth) return null;
   try {
     const res = await fetch(

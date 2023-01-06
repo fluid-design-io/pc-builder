@@ -3,8 +3,9 @@ import { BACKEND_URL } from 'lib/pb';
 import { getAuth } from 'lib/auth';
 import { AccountAddresses } from '@/account/AccountAddresses';
 import { Suspense } from 'react';
+import { BaseAuthStore } from 'pocketbase';
 
-const getUserAddresses = async ({ auth }) => {
+const getUserAddresses = async ({ auth }: { auth: BaseAuthStore | null }) => {
   if (!auth) return null;
   try {
     const res = await fetch(

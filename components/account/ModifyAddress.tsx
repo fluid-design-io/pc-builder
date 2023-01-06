@@ -3,7 +3,7 @@
 import { PlusIcon } from '@heroicons/react/24/outline';
 import clsxm from 'lib/clsxm';
 import { decodePbError } from 'lib/decodePbError';
-import { pb } from 'lib/pb';
+import { BACKEND_URL } from 'lib/pb';
 import useForm from 'lib/useForm';
 import {
   ModalBody,
@@ -45,11 +45,11 @@ const ConfirmCancelModal = ({ onConfirm, dismiss }) => {
 
 const EditAddressModal = ({ address, dismiss, isNew = false, onClose }) => {
   const router = useRouter();
-  const { user } = useUser();
   const [isPending, startTransition] = useTransition();
   const [isLoading, setIsLoading] = useState(false);
   const [isUpdated, setIsUpdated] = useState(false);
   const [toast] = useToast();
+  const { user } = useUser();
   const { inputs, handleChange } = useForm({
     street: address.street || '',
     city: address.city || '',
@@ -70,7 +70,17 @@ const EditAddressModal = ({ address, dismiss, isNew = false, onClose }) => {
 
   const saveAddress = async () => {
     setIsLoading(true);
-    const data = await pb.collection('addresses').update(address.id, inputs);
+    const data = await fetch(
+      `${BACKEND_URL}/api/collections/addresses/records/${address.id}`,
+      {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${user.token}`,
+        },
+        body: JSON.stringify(inputs),
+      }
+    ).then((res) => res.json());
     if (data.updated) {
       setIsLoading(false);
       setIsUpdated(true);
@@ -91,32 +101,47 @@ const EditAddressModal = ({ address, dismiss, isNew = false, onClose }) => {
       ...inputs,
       user: user.record.id,
     };
-    await pb
-      .collection('addresses')
-      .create(data)
-      .then((data) => {
-        if (data.created) {
-          setIsLoading(false);
-          setIsUpdated(true);
-          toast({
-            title: 'Address added',
-            message: 'Your address has been added.',
-          });
-          startTransition(() => {
-            router.refresh();
-          });
-          dismiss();
+    try {
+      const res = await fetch(
+        `${BACKEND_URL}/api/collections/addresses/records`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${user.token}`,
+          },
+          body: JSON.stringify(data),
         }
-      })
-      .catch((err) => {
-        setIsLoading(false);
+      ).then((res) => res.json());
+
+      if (res.code === 400) {
         toast({
           title: 'Error',
-          component: decodePbError(err),
+          component: decodePbError(res),
           role: 'error',
           autoDismiss: false,
         });
+        setIsLoading(false);
+        setIsUpdated(true);
+        return;
+      }
+      setIsLoading(false);
+      setIsUpdated(true);
+      toast({
+        title: 'Address added',
+        message: 'Your address has been added.',
       });
+      startTransition(() => {
+        router.refresh();
+      });
+      dismiss();
+    } catch (err) {
+      setIsLoading(false);
+      toast({
+        title: 'Error',
+        component: decodePbError(err),
+      });
+    }
   };
 
   return (
@@ -178,34 +203,39 @@ const EditAddressModal = ({ address, dismiss, isNew = false, onClose }) => {
 const ConfirmDeleteModal = ({ address, dismiss }) => {
   const router = useRouter();
   const [toast] = useToast();
+  const { user } = useUser();
   const [isLoading, setIsLoading] = useState(false);
   const [isPending, startTransition] = useTransition();
   const isMutating = isPending || isLoading;
   const handleDeleteAddress = async () => {
     setIsLoading(true);
-    await pb
-      .collection('addresses')
-      .delete(address.id)
-      .then((data) => {
-        toast({
-          title: 'Address deleted',
-          message: 'Your address has been deleted.',
-        });
-        setIsLoading(false);
-        startTransition(() => {
-          router.refresh();
-        });
-        dismiss();
-      })
-      .catch((err) => {
-        setIsLoading(false);
-        toast({
-          title: 'Error',
-          component: decodePbError(err),
-          role: 'error',
-          autoDismiss: false,
-        });
+    try {
+      const res = await fetch(
+        `${BACKEND_URL}/api/collections/addresses/records/${address.id}`,
+        {
+          method: 'DELETE',
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+          },
+        }
+      );
+      setIsLoading(false);
+      toast({
+        title: 'Address deleted',
+        message: 'Your address has been deleted.',
       });
+      startTransition(() => {
+        router.refresh();
+      });
+      dismiss();
+    } catch (err) {
+      setIsLoading(false);
+      toast({
+        title: 'Error',
+        component: decodePbError(err),
+        role: 'error',
+      });
+    }
   };
   return (
     <ModalContainer>

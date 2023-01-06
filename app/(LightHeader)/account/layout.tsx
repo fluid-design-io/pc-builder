@@ -4,14 +4,14 @@ import { useRouter } from 'next/navigation';
 import { AccountSidebarNavigation } from '@/account/AccountSidebarNavigation';
 import { Container } from '@/core/Container';
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const auth = getAuth();
-  const router = useRouter();
-  if (!auth) router.push('/login');
+  // const router = useRouter();
+  const auth = await getAuth();
+  // if (!auth) router.push('/login');
   return (
     <Container className='px-4 pb-6 sm:px-6 lg:px-8 lg:pb-16'>
       <main className='relative'>

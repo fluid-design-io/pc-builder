@@ -64,6 +64,8 @@ export default async function Page({ params: { slug } }) {
         className='h-64 w-full rounded-md object-cover sm:h-72 md:h-80 lg:h-96'
         width={1200}
         height={600}
+        placeholder='blur'
+        blurDataURL={`data:image/png;base64, ${post.cover_blur_data}`}
       />
       <article className='prose mt-4 dark:prose-invert md:mt-6 lg:prose-xl'>
         <h1>{post.title}</h1>

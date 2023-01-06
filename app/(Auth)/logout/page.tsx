@@ -1,11 +1,12 @@
 'use client';
 
-import { pb } from 'lib/pb';
+import { useUser } from 'lib/useUser';
 import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 
 export default function Logout() {
   const router = useRouter();
-  pb.authStore.clear();
+  const { clearUser } = useUser();
 
   const logoutServer = async () => {
     const res = await fetch('/api/auth/logout', {
@@ -19,7 +20,10 @@ export default function Logout() {
     }
   };
 
-  logoutServer();
+  useEffect(() => {
+    clearUser();
+    logoutServer();
+  }, []);
 
   return <p>You have been logged out.</p>;
 }

@@ -3,8 +3,10 @@
 import HCaptcha from '@hcaptcha/react-hcaptcha';
 import { ChevronRightIcon } from '@heroicons/react/20/solid';
 import clsxm from 'lib/clsxm';
+import { decodePbError } from 'lib/decodePbError';
 import { pb } from 'lib/pb';
 import { useToast } from 'lib/useToast';
+import { useUser } from 'lib/useUser';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
@@ -15,6 +17,7 @@ import { TextField } from '@/form/Fields';
 
 export default function Register() {
   const router = useRouter();
+  const { user, setUser } = useUser();
   const [presentToast] = useToast();
   const [identity, setIdentity] = useState('');
   const [password, setPassword] = useState('');
@@ -28,60 +31,50 @@ export default function Register() {
     !isCapchaVerified;
   const regester = async (e) => {
     e.preventDefault();
-    const res = await pb
-      .collection('users')
-      .create({
+
+    try {
+      await pb.collection('users').create({
         email: identity,
         password: password,
         passwordConfirm: passwordConfirm,
-      })
-      .catch((err) => {
-        presentToast({
-          title: 'Error',
-          message: err.message + ' ' + err.data.data.email.message,
-          role: 'error',
-          autoDismiss: false,
-        });
       });
-
-    if (res) {
+    } catch (error) {
       presentToast({
-        title: 'Success',
-        message: 'Account created successfully',
+        title: 'Error',
+        component: decodePbError(error),
+        role: 'error',
+        autoDismiss: false,
       });
-    } else {
       return;
     }
-
-    // Login locally
-    const data = await pb
-      .collection('users')
-      .authWithPassword(identity, password)
-      .catch((err) => {
-        setError(err.message);
-      });
-    const cookie = pb.authStore.exportToCookie();
-    if (data) {
-      // set the auth cookie to server
-      const res = await fetch('/api/auth/set-cookie', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ cookie }),
-      });
-      if (res.status === 200) {
+    // set the auth cookie to server
+    const res = await fetch('/api/auth/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        identity,
+        password,
+      }),
+    }).then((res) => res.json());
+    setUser(res.data);
+    presentToast({
+      title: 'Success',
+      component: 'You have successfully registered',
+    });
+    if (res.success) {
+      setTimeout(() => {
         router.push('/account');
-      }
+      }, 800);
     }
   };
-  if (pb.authStore.isValid) {
+  if (user) {
     router.push('/account');
   }
   function handleVerificationSuccess(token: string, ekey: string): any {
     setIsCapchaVerified(true);
   }
-
   return (
     <>
       <div className='flex flex-col'>
@@ -118,6 +111,7 @@ export default function Register() {
           name='email'
           type='email'
           autoComplete='email'
+          value={identity}
           required
           onChange={(e) => setIdentity(e.target.value)}
         />
@@ -126,6 +120,7 @@ export default function Register() {
           id='password'
           name='password'
           type='password'
+          value={password}
           autoComplete='current-password'
           required
           onChange={(e) => setPassword(e.target.value)}
@@ -135,20 +130,26 @@ export default function Register() {
           id='passwordConfirm'
           name='passwordConfirm'
           type='password'
+          value={passwordConfirm}
           autoComplete='current-password'
           required
           onChange={(e) => setPasswordConfirm(e.target.value)}
         />
-        <HCaptcha
-          sitekey={process.env.NEXT_PUBLIC_HCAPTCHA_SITE_KEY}
-          onVerify={(token, ekey) => handleVerificationSuccess(token, ekey)}
-        />
+        {
+          // Only render the captcha in production
+          process.env.NODE_ENV === 'production' && (
+            <HCaptcha
+              sitekey={process.env.NEXT_PUBLIC_HCAPTCHA_SITE_KEY}
+              onVerify={(token, ekey) => handleVerificationSuccess(token, ekey)}
+            />
+          )
+        }
         <div>
           <Button
             type='submit'
             variant='solid'
             color='primary'
-            disabled={disabled}
+            disabled={process.env.NODE_ENV === 'production' ? disabled : false}
             className={clsxm(disabled && 'cursor-not-allowed', 'w-full')}
           >
             <span>Sign Up</span>

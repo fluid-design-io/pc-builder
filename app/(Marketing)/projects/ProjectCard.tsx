@@ -13,6 +13,8 @@ export const ProjectCard = ({ post }) => {
             className='h-48 w-full object-cover'
             width={300}
             height={450}
+            placeholder='blur'
+            blurDataURL={`data:image/png;base64, ${post.cover_blur_data}`}
           />
         </div>
         <div className='p-4 pb-2'>

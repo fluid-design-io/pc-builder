@@ -2,6 +2,7 @@
 
 import { Switch } from '@headlessui/react';
 import clsxm from 'lib/clsxm';
+import { decodePbError } from 'lib/decodePbError';
 import { BACKEND_URL } from 'lib/pb';
 import useForm from 'lib/useForm';
 import {
@@ -13,20 +14,44 @@ import {
   useModal,
 } from 'lib/useModal';
 import { useToast } from 'lib/useToast';
+import { useUser } from 'lib/useUser';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 import { Button } from '@/buttons/AppButton';
 import { TextField } from '@/form/Fields';
-import { decodePbError } from 'lib/decodePbError';
 
 const ConfirmDeleteModal = ({ user, dismiss }) => {
+  const { user: u, clearUser } = useUser();
   const [username, setUsername] = useState('');
+  const [presentToast] = useToast();
+  const router = useRouter();
   const handleDelete = async () => {
-    const res = await fetch(`${BACKEND_URL}/api/users/${user.id}`, {
-      method: 'DELETE',
-    });
-    if (res.status === 204) {
+    try {
+      await fetch(`${BACKEND_URL}/api/collections/users/records/${user.id}`, {
+        method: 'DELETE',
+        headers: {
+          Authorization: `Bearer ${u.token}`,
+        },
+      });
       dismiss();
+      clearUser();
+      presentToast({
+        title: 'Success',
+        message: 'Your account has been deleted',
+        role: 'info',
+      });
+      setTimeout(() => {
+        router.push('/login');
+      }, 800);
+    } catch (err) {
+      presentToast({
+        title: 'Error',
+        component: decodePbError(err),
+        role: 'error',
+        autoDismiss: false,
+      });
+      return;
     }
   };
 
@@ -39,7 +64,7 @@ const ConfirmDeleteModal = ({ user, dismiss }) => {
           removed from our servers forever. This action is irreversible.
         </ModalDescription>
         <TextField
-          label='Re-enter your username'
+          label={'Re-enter your username: ' + user.username}
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           placeholder={user.username}
@@ -50,7 +75,7 @@ const ConfirmDeleteModal = ({ user, dismiss }) => {
         <Button
           color='red'
           disabled={username !== user.username}
-          onClick={dismiss}
+          onClick={handleDelete}
         >
           Confirm
         </Button>

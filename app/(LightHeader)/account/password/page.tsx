@@ -3,26 +3,35 @@
 import { Button } from '@/buttons/AppButton';
 import { TextField } from '@/form/Fields';
 import useForm from 'lib/useForm';
-import { useUser } from 'lib/useUser';
-import { pb } from 'lib/pb';
 import { useToast } from 'lib/useToast';
 import { decodePbError } from 'lib/decodePbError';
 import { useState } from 'react';
+import { BACKEND_URL } from 'lib/pb';
+import { useUser } from 'lib/useUser';
 
 export default function Page() {
-  const { user } = useUser();
   const { inputs, handleChange } = useForm({
     oldPassword: '',
     password: '',
     passwordConfirm: '',
   });
   const [toast] = useToast();
+  const { user } = useUser();
   const [isLoading, setIsLoading] = useState(false);
   const handeFormSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
     try {
-      await pb.collection('users').update(user.record.id, inputs);
+      await fetch(
+        `${BACKEND_URL}/api/collections/users/records/${user.record.id}`,
+        {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(inputs),
+        }
+      );
       toast({
         title: 'Password Updated',
         message: 'Your password has been updated.',

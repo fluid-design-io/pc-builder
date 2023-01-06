@@ -53,7 +53,7 @@ export const AccountNavigation = ({ isSignedIn, theme = 'auto' }) => {
               <div className='px-4 py-3'>
                 <p className='text-sm'>Signed in as</p>
                 <p className='truncate text-sm font-medium'>
-                  {user.record.email}
+                  {user?.record?.email || 'Unknown'}
                 </p>
               </div>
               {accountNavigation.map((group, groupIdx) => (
