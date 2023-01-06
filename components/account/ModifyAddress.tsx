@@ -71,7 +71,7 @@ const EditAddressModal = ({ address, dismiss, isNew = false, onClose }) => {
   const saveAddress = async () => {
     setIsLoading(true);
     const data = await fetch(
-      `${BACKEND_URL}/api/collections/addresses/records/${address.id}`,
+      `https://billowing-hill-1662.fly.dev/api/collections/addresses/records/${address.id}`,
       {
         method: 'PATCH',
         headers: {
@@ -103,7 +103,7 @@ const EditAddressModal = ({ address, dismiss, isNew = false, onClose }) => {
     };
     try {
       const res = await fetch(
-        `${BACKEND_URL}/api/collections/addresses/records`,
+        `https://billowing-hill-1662.fly.dev/api/collections/addresses/records`,
         {
           method: 'POST',
           headers: {
@@ -211,7 +211,7 @@ const ConfirmDeleteModal = ({ address, dismiss }) => {
     setIsLoading(true);
     try {
       const res = await fetch(
-        `${BACKEND_URL}/api/collections/addresses/records/${address.id}`,
+        `https://billowing-hill-1662.fly.dev/api/collections/addresses/records/${address.id}`,
         {
           method: 'DELETE',
           headers: {

@@ -5,13 +5,16 @@ import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 
 const renewAuth = async (auth: string) => {
-  return await fetch(`${BACKEND_URL}/api/collections/users/auth-refresh`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${auth}`,
-    },
-  });
+  return await fetch(
+    `https://billowing-hill-1662.fly.dev/api/collections/users/auth-refresh`,
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${auth}`,
+      },
+    }
+  );
 };
 
 export async function middleware(request: NextRequest) {

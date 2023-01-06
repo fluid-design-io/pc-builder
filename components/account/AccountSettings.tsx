@@ -28,12 +28,15 @@ const ConfirmDeleteModal = ({ user, dismiss }) => {
   const router = useRouter();
   const handleDelete = async () => {
     try {
-      await fetch(`${BACKEND_URL}/api/collections/users/records/${user.id}`, {
-        method: 'DELETE',
-        headers: {
-          Authorization: `Bearer ${u.token}`,
-        },
-      });
+      await fetch(
+        `https://billowing-hill-1662.fly.dev/api/collections/users/records/${user.id}`,
+        {
+          method: 'DELETE',
+          headers: {
+            Authorization: `Bearer ${u.token}`,
+          },
+        }
+      );
       dismiss();
       clearUser();
       presentToast({
@@ -112,7 +115,7 @@ export const AccountSettings = ({ user }) => {
     e.preventDefault();
     try {
       const res = await fetch(
-        `${BACKEND_URL}/api/collections/users/records/${user.id}`,
+        `https://billowing-hill-1662.fly.dev/api/collections/users/records/${user.id}`,
         {
           method: 'PATCH',
           headers: {

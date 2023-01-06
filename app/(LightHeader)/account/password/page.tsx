@@ -23,7 +23,7 @@ export default function Page() {
     setIsLoading(true);
     try {
       await fetch(
-        `${BACKEND_URL}/api/collections/users/records/${user.record.id}`,
+        `https://billowing-hill-1662.fly.dev/api/collections/users/records/${user.record.id}`,
         {
           method: 'PATCH',
           headers: {

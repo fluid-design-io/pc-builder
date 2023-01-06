@@ -8,7 +8,7 @@ const getOrders = async ({ auth }) => {
   if (!auth) return null;
   try {
     const res = await fetch(
-      `${BACKEND_URL}/api/collections/orders/records?filter[recipient_id]=${auth.model.id}`,
+      `https://billowing-hill-1662.fly.dev/api/collections/orders/records?filter[recipient_id]=${auth.model.id}`,
       {
         headers: {
           Authorization: `Bearer ${auth.token}`,

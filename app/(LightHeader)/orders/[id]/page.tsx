@@ -15,7 +15,7 @@ const getOrder = async ({ id }) => {
   try {
     // also pass expand=address to get the address
     const res = await fetch(
-      `${BACKEND_URL}/api/collections/orders/records/${id}?expand=recipient`,
+      `https://billowing-hill-1662.fly.dev/api/collections/orders/records/${id}?expand=recipient`,
       {
         headers: {
           Authorization: `Bearer ${token}`,

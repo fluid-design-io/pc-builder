@@ -11,7 +11,7 @@ import { ArticleContent } from './ArticleContent';
 const getPostBySlug = async ({ slug }) => {
   try {
     const res = await fetch(
-      `${BACKEND_URL}/api/collections/blog/records?filter=(slug='${slug}')`
+      `https://billowing-hill-1662.fly.dev/api/collections/blog/records?filter=(slug='${slug}')`
     );
     return await res.json();
   } catch (err) {
@@ -22,7 +22,9 @@ const getPostBySlug = async ({ slug }) => {
 
 const getPosts = async () => {
   try {
-    const res = await fetch(`${BACKEND_URL}/api/collections/blog/records`);
+    const res = await fetch(
+      `https://billowing-hill-1662.fly.dev/api/collections/blog/records`
+    );
     const posts = await res.json();
     return posts;
   } catch (err) {
@@ -59,7 +61,7 @@ export default async function Page({ params: { slug } }) {
   return (
     <Container className='min-h-page'>
       <Image
-        src={`${BACKEND_URL}/api/files/blog/${post.id}/${post.cover}`}
+        src={`https://billowing-hill-1662.fly.dev/api/files/blog/${post.id}/${post.cover}`}
         alt={post.title}
         className='h-64 w-full rounded-md object-cover sm:h-72 md:h-80 lg:h-96'
         width={1200}

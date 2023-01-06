@@ -8,7 +8,7 @@ export const ProjectCard = ({ post }) => {
       <div className='card-secondary card-secondary-hover !p-0'>
         <div className='relative'>
           <Image
-            src={`${BACKEND_URL}/api/files/blog/${post.id}/${post.cover}?thumb=300x450`}
+            src={`https://billowing-hill-1662.fly.dev/api/files/blog/${post.id}/${post.cover}?thumb=300x450`}
             alt={post.title}
             className='h-48 w-full object-cover'
             width={300}

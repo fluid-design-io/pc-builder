@@ -7,7 +7,9 @@ import { ProjectCard } from './ProjectCard';
 
 const getPosts = async () => {
   try {
-    const res = await fetch(`${BACKEND_URL}/api/collections/blog/records`);
+    const res = await fetch(
+      `https://billowing-hill-1662.fly.dev/api/collections/blog/records`
+    );
     const blogs = await res.json();
     return blogs;
   } catch (err) {

@@ -7,7 +7,7 @@ const getUser = async ({ auth }: { auth: BaseAuthStore }) => {
   if (!auth) return null;
   try {
     const res = await fetch(
-      `${BACKEND_URL}/api/collections/users/records/${auth.model.id}`,
+      `https://billowing-hill-1662.fly.dev/api/collections/users/records/${auth.model.id}`,
       {
         headers: {
           Authorization: `Bearer ${auth.token}`,
