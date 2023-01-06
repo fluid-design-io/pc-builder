@@ -4,7 +4,6 @@ import HCaptcha from '@hcaptcha/react-hcaptcha';
 import { ChevronRightIcon } from '@heroicons/react/20/solid';
 import clsxm from 'lib/clsxm';
 import { decodePbError } from 'lib/decodePbError';
-import { pb } from 'lib/pb';
 import { useToast } from 'lib/useToast';
 import { useUser } from 'lib/useUser';
 import Link from 'next/link';
@@ -33,11 +32,20 @@ export default function Register() {
     e.preventDefault();
 
     try {
-      await pb.collection('users').create({
-        email: identity,
-        password: password,
-        passwordConfirm: passwordConfirm,
-      });
+      await fetch(
+        `https://billowing-hill-1662.fly.dev/api/collections/users/records`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            identity,
+            password,
+            passwordConfirm,
+          }),
+        }
+      ).then((res) => res.json());
     } catch (error) {
       presentToast({
         title: 'Error',
