@@ -40,7 +40,7 @@ export default function Register() {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            identity,
+            email: identity,
             password,
             passwordConfirm,
           }),
