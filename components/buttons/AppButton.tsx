@@ -38,6 +38,7 @@ export function Button({
   className = '',
   href = undefined,
   isLoading = false,
+  disabled: buttonDisabled,
   children,
   ...props
 }: {
@@ -55,25 +56,28 @@ export function Button({
     className
   );
 
+  const disabled = isLoading || buttonDisabled;
   return href ? (
     <Link href={href} className={className} {...props}>
       {children}
     </Link>
   ) : (
-    <button className={clsxm('relative', className)} {...props}>
+    <button
+      className={clsxm('relative', className)}
+      disabled={disabled}
+      {...props}
+    >
       {isLoading && (
         <div
           className={clsxm(
             'absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2',
             {
-              'text-black dark:text-white': [
-                'primary',
-                'secondary',
-                'dark',
-              ].includes(variant),
+              'text-white': ['primary', 'secondary', 'dark'].includes(variant),
               'text-black': ['light'].includes(variant),
-              'text-primary-500': ['outline'].includes(variant),
-            }
+              'text-primary-500': ['outline', 'ghost'].includes(variant),
+            },
+            isLoading &&
+              'relative text-transparent transition-none hover:text-transparent disabled:cursor-wait'
           )}
         >
           <svg
@@ -98,9 +102,7 @@ export function Button({
           </svg>
         </div>
       )}
-      <div className={clsxm(isLoading && 'opacity-0', 'inline-flex')}>
-        {children}
-      </div>
+      {children}
     </button>
   );
 }

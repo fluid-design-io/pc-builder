@@ -18,6 +18,7 @@ export default function Register() {
   const router = useRouter();
   const { user, setUser } = useUser();
   const [presentToast] = useToast();
+  const [isLoading, setIsLoading] = useState(false);
   const [identity, setIdentity] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirm, setPasswordConfirm] = useState('');
@@ -30,9 +31,9 @@ export default function Register() {
     !isCapchaVerified;
   const regester = async (e) => {
     e.preventDefault();
-
+    setIsLoading(true);
     try {
-      await fetch(
+      const res = await fetch(
         `https://billowing-hill-1662.fly.dev/api/collections/users/records`,
         {
           method: 'POST',
@@ -46,6 +47,16 @@ export default function Register() {
           }),
         }
       ).then((res) => res.json());
+      if (res.code !== 200) {
+        presentToast({
+          title: 'Error',
+          component: decodePbError(res),
+          role: 'error',
+          autoDismiss: false,
+        });
+        setIsLoading(false);
+        return;
+      }
     } catch (error) {
       presentToast({
         title: 'Error',
@@ -66,20 +77,28 @@ export default function Register() {
         password,
       }),
     }).then((res) => res.json());
-    setUser(res.data);
-    presentToast({
-      title: 'Success',
-      component: 'You have successfully registered',
-    });
     if (res.success) {
+      presentToast({
+        title: 'Success',
+        component: 'You have successfully registered',
+      });
+      setUser(res.data);
       setTimeout(() => {
         router.push('/account');
       }, 800);
+    } else {
+      presentToast({
+        title: 'Error',
+        component: decodePbError(res.data),
+        role: 'error',
+        autoDismiss: false,
+      });
     }
+    setIsLoading(false);
   };
-  if (user) {
+  /* if (user) {
     router.push('/account');
-  }
+  } */
   function handleVerificationSuccess(token: string, ekey: string): any {
     setIsCapchaVerified(true);
   }
@@ -158,7 +177,8 @@ export default function Register() {
             variant='solid'
             color='primary'
             disabled={process.env.NODE_ENV === 'production' ? disabled : false}
-            className={clsxm(disabled && 'cursor-not-allowed', 'w-full')}
+            className={clsxm('w-full')}
+            isLoading={isLoading}
           >
             <span>Sign Up</span>
             <ChevronRightIcon

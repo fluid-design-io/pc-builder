@@ -46,7 +46,7 @@ export const AccountAddresses = async ({ promise }) => {
   const isMaxAddressesReached = items.length && items.length >= 6;
   return (
     <div className='divide-y divide-gray-100 dark:divide-gray-600/40'>
-      {isMaxAddressesReached && (
+      {!!isMaxAddressesReached && (
         <p className='px-4 sm:p-6'>
           You have reached the maximum number of addresses. Please delete an
           address to add a new one.

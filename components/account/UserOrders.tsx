@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import { CheckCircleIcon } from '@heroicons/react/20/solid';
+import { TruckIcon } from '@heroicons/react/24/outline';
 import { getAuth } from 'lib/auth';
-import { BACKEND_URL } from 'lib/pb';
 import { Fragment } from 'react';
 
 import { LoadingSkeleton } from '@/core/LoadingSkeleton';
@@ -92,7 +92,6 @@ const UserOrderItems = async ({ orderId }) => {
 export const UserOrders = async ({ promise }) => {
   const ordersData = await promise;
   const orders = ordersData?.items || [];
-  if (!orders.length) return null;
   const formatDate = (date) => {
     const d = new Date(date);
     return d.toLocaleDateString('en-US', {
@@ -101,6 +100,14 @@ export const UserOrders = async ({ promise }) => {
       day: 'numeric',
     });
   };
+  if (orders.length === 0) {
+    return (
+      <div className='card-secondary flex flex-col items-center gap-4'>
+        <TruckIcon className='h-6 w-6 sm:h-8 sm:w-8 lg:h-9 lg:w-9' />
+        <p>You have not placed any orders yet. </p>
+      </div>
+    );
+  }
   return (
     <Fragment>
       {orders.map((order) => (
